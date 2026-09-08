@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Концепция сообщества жены</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Golos+Text:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#FBF8F9; --surface:#FFFFFF; --tint:#F3E8EC; --ink:#26161F; --muted:#6F5C67; --line:#E6D8DE;
+  --accent:#7A2E4F; --accent-2:#B86A85;
+  --ok:#2F6B45; --warn:#A8501B; --capsbg:#2A1622; --capsink:#FFFFFF; --shadow:0 4px 16px rgba(42,22,34,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1A1116; --surface:#241820; --tint:#2E1F27; --ink:#F5ECF0; --muted:#B79FAB; --line:#3D2A34;
+    --accent:#E48DB0; --accent-2:#C77A97;
+    --ok:#7FC496; --warn:#F0A26B; --capsbg:#0F0A0D; --capsink:#FFFFFF; --shadow:0 4px 16px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1A1116; --surface:#241820; --tint:#2E1F27; --ink:#F5ECF0; --muted:#B79FAB; --line:#3D2A34;
+  --accent:#E48DB0; --accent-2:#C77A97;
+  --ok:#7FC496; --warn:#F0A26B; --capsbg:#0F0A0D; --capsink:#FFFFFF; --shadow:0 4px 16px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.45}
+.deck{height:100dvh;overflow-y:auto;scroll-snap-type:y proximity;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){.deck{scroll-behavior:auto}}
+.slide{min-height:100dvh;scroll-snap-align:start;display:grid;place-items:center;padding:clamp(20px,4vw,48px) clamp(16px,5vw,64px)}
+.inner{width:min(1100px,100%);display:flex;flex-direction:column;gap:clamp(14px,2vw,22px)}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+.title{font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:700;font-size:clamp(23px,3.3vw,38px);line-height:1.12;text-wrap:balance;margin:0}
+.lead{font-size:clamp(16px,1.45vw,19px);margin:0;max-width:64ch}
+p{margin:0}
+ul{margin:0;padding-left:1.15em}
+li{margin:0 0 7px}
+li:last-child{margin-bottom:0}
+.check li::marker{content:"✓  ";color:var(--ok);font-weight:700}
+.warnlist li::marker{content:"!  ";color:var(--warn);font-weight:700}
+.note{color:var(--muted);font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.card h3{font-size:15px;font-weight:700;margin:0 0 6px}
+.card p,.card li{font-size:15px}
+.card .k{font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:700;color:var(--accent);font-size:13px;letter-spacing:.02em;margin:0 0 4px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
+.stat b{display:block;font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:900;font-size:clamp(22px,3vw,40px);line-height:1.05;color:var(--accent);font-variant-numeric:tabular-nums;min-width:0}
+.stat span{display:block;color:var(--muted);font-size:14px;margin-top:6px}
+.caps{background:var(--capsbg);color:var(--capsink);font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(17px,2.3vw,28px);line-height:1.15;padding:20px 24px;border-radius:6px;text-align:center}
+.caps small{display:block;font-family:"Golos Text",system-ui,sans-serif;font-weight:500;text-transform:none;font-size:13px;opacity:.82;margin-top:10px;letter-spacing:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.cols h3,.col h3{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+@media (max-width:720px){.cols{grid-template-columns:1fr}}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.vs{grid-template-columns:1fr}}
+.vs .card{display:flex;flex-direction:column;gap:6px}
+.vs .big{font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:900;font-size:clamp(22px,3vw,34px);color:var(--accent);line-height:1.1}
+.hooks{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;counter-reset:h}
+@media (max-width:720px){.hooks{grid-template-columns:1fr}}
+.hooks div{padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.hooks div b{display:block;font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;color:var(--accent);margin-bottom:3px;letter-spacing:.02em}
+.flow{display:flex;flex-wrap:wrap;gap:8px}
+.flow div{background:var(--tint);border-radius:8px;padding:8px 12px;font-size:14px;flex:1 1 140px}
+.flow div b{display:block;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.tint{background:var(--tint);border-radius:10px;padding:14px 18px}
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:860px){.tl{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.tl{grid-template-columns:1fr}}
+.tl .card h3{font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:700;color:var(--accent);font-size:14px}
+.tl .card span{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+.money{border:1px solid var(--warn);border-radius:10px;padding:14px 18px}
+.money strong{color:var(--warn)}
+.cover .inner{gap:clamp(18px,3vw,32px)}
+.ctl{position:fixed;right:14px;bottom:14px;display:flex;gap:6px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 8px;font-size:13px;box-shadow:var(--shadow);font-variant-numeric:tabular-nums;z-index:5}
+.ctl button{border:0;background:var(--tint);color:var(--ink);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1}
+.ctl button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ctl .count{min-width:52px;text-align:center;color:var(--muted)}
+@media print{
+  .deck{height:auto;overflow:visible}
+  .slide{min-height:auto;break-after:page;page-break-after:always}
+  .ctl{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<section class="slide cover" id="s1">
+  <div class="inner">
+    <p class="eyebrow">Концепция сообщества жены · версия 2 · 8 сентября 2026</p>
+    <h1 class="title">Примеряю на свой 42⁠–⁠44 всё, что стоит до 3000 ₽</h1>
+    <p class="lead">Обзоры одежды с артикулами и метками Ozon по модели Марины Куценко, но на противоположный размер. В кадре — жена, ИИ — только в производстве. Первая съёмка 22⁠–⁠27 сентября.</p>
+    <div class="stats">
+      <div class="stat"><b>42⁠–⁠44</b><span>размер в названии</span></div>
+      <div class="stat"><b>до 3000 ₽</b><span>цена всего, что показываем</span></div>
+      <div class="stat"><b>7 в неделю</b><span>роликов: одна съёмка, публикация ежедневно</span></div>
+      <div class="stat"><b>Ozon</b><span>только шопсы AdBlogger, без рекламы</span></div>
+    </div>
+    <div class="caps">Эти лосины ищут все<small>Первый хук из библиотеки: «во-первых, 900 рублей, во-вторых, не просвечивают, в-третьих, размеры с 40».</small></div>
+  </div>
+</section>
+
+<section class="slide" id="s2">
+  <div class="inner">
+    <p class="eyebrow">0 · Правила шопсов AdBlogger</p>
+    <h2 class="title">Что требует программа, прежде чем платить</h2>
+    <div class="cards">
+      <div class="card"><h3>Автор в кадре</h3><p>Дословно: «нейросеть не должна заменять вас и товар в кадре», автора должно быть видно и/или слышно. Поэтому в кадре жена сама.</p></div>
+      <div class="card"><h3>Порог входа</h3><p>100 подписчиков, открытое сообщество или страница, хотя бы одна публикация за 30 дней.</p></div>
+      <div class="card"><h3>Деньги</h3><p>Только Ozon. Комиссия до 50 % (на практике 8⁠–⁠50 %) от оплаченной цены. Начисление через 14 дней, окно 30 дней, возврат снимает комиссию.</p></div>
+      <div class="card"><h3>Выплаты</h3><p>Самозанятая — сразу, без минимума. Маркировка ERID автоматическая для ссылок AdBlogger.</p></div>
+      <div class="card"><h3>Порядок с товаром</h3><p>Товар берётся в работу в кабинете: 20 дней на материал, модерация, публикация в 3 дня после одобрения. В работе до 3 товаров — проверить в кабинете.</p></div>
+      <div class="card"><h3>Оригинальность</h3><p>Чужие описания и фото карточек не копировать. За оригинальный контент FAQ упоминает бесплатный образец от продавца — уточнить.</p></div>
+    </div>
+    <p class="note">Источники и цитаты — в файле adblogger-rules-check.md. Сбои выплат AdBlogger встречаются в отзывах (1,4 из 5) — риск, не блокер.</p>
+  </div>
+</section>
+
+<section class="slide" id="s3">
+  <div class="inner">
+    <p class="eyebrow">1 · Решения</p>
+    <h2 class="title">Зафиксировано 8 сентября, не пересматривается</h2>
+    <div class="cols">
+      <div>
+        <ul>
+          <li><strong>В кадре жена сама.</strong> ИИ — сценарии, хуки, субтитры, монтаж, подбор товаров.</li>
+          <li><strong>Ниша:</strong> одежда с артикулами, как у Марины. Размер 42⁠–⁠44, всё до 3000 ₽, самое массовое. Аудитория широкая женская.</li>
+          <li><strong>Бельё, спорт-топы, лосины</strong> — как товар «как сидит», обращение к девочкам, без секси-подачи.</li>
+          <li><strong>Родион иногда в кадре</strong> — реакция мужа.</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li><strong>Время жены до 1 часа в день</strong> → съёмка пачкой раз в неделю, публикация ежедневно.</li>
+          <li><strong>Только Ozon через шопсы,</strong> без рекламы. Жена оформит самозанятость.</li>
+          <li><strong>Первая съёмка 22⁠–⁠27 сентября.</strong> Сообщество vk.ru/club239453333 пока не трогаем.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="money"><p><strong>Цель Родиона: 300 тыс. ₽ через месяц</strong>, ставка на вирусные ролики с бельём и спортом. Данные Марины этого не подтверждают: первый месяц 75 тыс. просмотров, взлёт на девятый месяц, 300 тыс. ₽ требуют её августа — 10 млн просмотров и 8 товарных хитов. Риск обозначен, решение принято.</p></div>
+  </div>
+</section>
+
+<section class="slide" id="s4">
+  <div class="inner">
+    <p class="eyebrow">2 · Позиционирование</p>
+    <h2 class="title">Формула Марины «размер в названии + честность», зеркально</h2>
+    <div class="vs">
+      <div class="card"><p class="k">Марина</p><p class="big">50⁠–⁠52</p><p>«Честные обзоры WB и Ozon для размера 50⁠–⁠52». История −23 кг, «я примеряю всё на себе».</p></div>
+      <div class="card"><p class="k">Мы</p><p class="big">42⁠–⁠44 и всё до 3000 ₽</p><p>Спортивная фигура, маленький размер, самые массовые категории. Та же честность: «говорю, что брать не надо».</p></div>
+    </div>
+    <div class="caps">Примеряю на свой 42⁠–⁠44 всё, что стоит до 3000 ₽, и говорю, что брать не надо<small>Одна фраза для шапки и закрепа. Название по шаблону «Имя / WB / Ozon / ОБЗОРЫ до 3000 ₽» — когда решим трогать сообщество.</small></div>
+  </div>
+</section>
+
+<section class="slide" id="s5">
+  <div class="inner">
+    <p class="eyebrow">3 · Три формата</p>
+    <h2 class="title">Скелеты сняты с 14 роликов Марины</h2>
+    <div class="cards">
+      <div class="card">
+        <p class="k">А · Говорящий товар · 20⁠–⁠40 с · 4 в неделю</p>
+        <div class="flow">
+          <div><b>0⁠–⁠3 с</b>вещь в руках, хук; сверху заголовок белым капсом</div>
+          <div><b>3⁠–⁠10 с</b>цена первой фразой, что скрывает, размерный ряд</div>
+          <div><b>10⁠–⁠25 с</b>три образа жёсткими склейками, та же причёска и угол</div>
+          <div><b>финал</b>«ссылочку оставила в описании»</div>
+        </div>
+      </div>
+      <div class="card">
+        <p class="k">Б · Переодевания под музыку · 11⁠–⁠17 с · 2 в неделю</p>
+        <p>Без речи. Сверху капсом вопрос на 1,5⁠–⁠3 с: «Я НОШУ 42 РАЗМЕР И ВОТ КАК Я ПОЙДУ…», дальше подписи «на работу / в город / на свидание». 4⁠–⁠7 образов, склейка каждые 2⁠–⁠3 с, шаг на месте или дорожка как подиум. Все артикулы в описании.</p>
+        <p class="note" style="margin-top:8px">Ошибка Марины, которую не повторяем: показать 7 образов и дать 4 артикула.</p>
+      </div>
+      <div class="card">
+        <p class="k">В · Реакция мужа · 20⁠–⁠30 с · 1 в неделю</p>
+        <p>Хук Марины на 3 млн: «Муж любит, когда я мою ему ноги…» → гель для душа. Наш вариант: Родион реагирует на образ или бюджет («Она сказала, что этот костюм стоит 1900. Я не поверил»), товар на третьей фразе, финальный кадр — товар крупно.</p>
+      </div>
+    </div>
+    <p class="note">Подписи мелкие, обычным шрифтом, только ключевые фразы, без плашек и без призыва в ролике. Артикулы построчно и метка Ozon — в описании.</p>
+  </div>
+</section>
+
+<section class="slide" id="s6">
+  <div class="inner">
+    <p class="eyebrow">4 · Библиотека хуков</p>
+    <h2 class="title">Первая фраза и заголовок капсом — десять заготовок</h2>
+    <div class="hooks">
+      <div><b>Эти лосины ищут все</b>«Эти лосины ищут все: во-первых, 900 рублей, во-вторых, не просвечивают, в-третьих, размеры с 40».</div>
+      <div><b>Худым нельзя оверсайз?</b>«Худым нельзя носить оверсайз, он же меня потеряет? Проверяю».</div>
+      <div><b>Только для маленькой груди</b>«Это видео только для девочек с маленькой грудью. Остальные пролистывайте».</div>
+      <div><b>Джинсы, которые не висят</b>«Хочется джинсы, но всё висит на попе? Показываю три пары, которые сидят».</div>
+      <div><b>Неделя за 4 800 ₽</b>«Собрала пять образов на неделю за 4 800 рублей».</div>
+      <div><b>Так какой у меня размер?</b>«Так какой у меня размер? 42 или 44 — угадай по образу».</div>
+      <div><b>Муж сказал…</b>«Муж сказал, что в этом платье я похожа на школьницу. Сейчас разберёмся».</div>
+      <div><b>Не брать</b>«Три вещи с Ozon до 3000, которые я бы не брала».</div>
+      <div><b>700 против 3000</b>«Спортивный топ за 700 рублей против топа за 3000. Разница видна?»</div>
+      <div><b>Не видно под белым</b>«Бельё, которое не видно под белой футболкой. Проверяю на себе».</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s7">
+  <div class="inner">
+    <p class="eyebrow">5 · Съёмка пачкой</p>
+    <h2 class="title">Раз в неделю, два часа, семь роликов</h2>
+    <div class="cols">
+      <div>
+        <h3>Чек-лист площадки</h3>
+        <ul class="check">
+          <li>Один угол: однотонная стена и одна деталь (растение, комод).</li>
+          <li>Штатив на уровне груди, дневной свет или кольцевая лампа.</li>
+          <li>Одна причёска и макияж на всю пачку.</li>
+          <li>5⁠–⁠7 образов разложены по порядку, список хуков распечатан.</li>
+        </ul>
+        <p class="note" style="margin-top:10px">Снимаем: 4 говорящих по 3 образа, 1 переодевания на 6 образов, 1⁠–⁠2 с Родионом. Монтаж — Родион с ИИ. Публикация каждый день в 12⁠–⁠13 МСК, запас на неделю вперёд.</p>
+      </div>
+      <div>
+        <h3>Описание клипа</h3>
+        <ul>
+          <li>Первая строка — боль или цена.</li>
+          <li>Артикулы построчно: «Лосины чёрные 123456789».</li>
+          <li>Метка товара Ozon.</li>
+          <li>6⁠–⁠8 хэштегов: #обзор #ozon #wildberries #42размер #образы #дешевоикрасиво.</li>
+        </ul>
+        <div class="tint" style="margin-top:12px"><p>Метки шопсов живут около месяца: раз в месяц лучшие ролики перевыкладываем с новыми метками.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s8">
+  <div class="inner">
+    <p class="eyebrow">6⁠–⁠7 · Стена и товары</p>
+    <h2 class="title">Стена — витрина, первые 20 товаров — спорт и база</h2>
+    <div class="cols">
+      <div>
+        <h3>Стена</h3>
+        <ul>
+          <li>Каждый день пост «Перейти на Ozon»: 1⁠–⁠3 фото и одна фраза-выгода.</li>
+          <li>Через день — тизер клипа ссылкой. Раз в неделю — опрос «какой образ лучше».</li>
+          <li>Каждому «где купить / артикул?» — ответ в течение часа. Это и есть продажи.</li>
+          <li>Бельё и 18+ помечать «18+», как Марина.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Первые 20 товаров</h3>
+        <ul>
+          <li>Категории: лосины, спортивные топы, базовые джинсы, платья; бюстгальтеры и боди — «как сидит».</li>
+          <li>Критерии: есть на Ozon, до 3000 ₽, размерный ряд с 40⁠–⁠42, много отзывов, живая карточка, не одна расцветка.</li>
+          <li>Первая пачка: 8 товаров на 2 недели. Подбор через навык shops-product-match.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s9">
+  <div class="inner">
+    <p class="eyebrow">8 · Четыре недели</p>
+    <h2 class="title">От самозанятости до второй съёмки</h2>
+    <div class="tl">
+      <div class="card"><h3>Неделя 1</h3><span>9⁠–⁠15 сентября</span><ul><li>Самозанятость.</li><li>100 подписчиков и публикация за 30 дней, подать в шопсы.</li><li>Собрать 8 товаров.</li><li>Угол, штатив, свет; распечатать хуки.</li></ul></div>
+      <div class="card"><h3>Неделя 2</h3><span>16⁠–⁠21 сентября</span><ul><li>Подключение к шопсам.</li><li>Первые 3 товара в работу в кабинете: 20 дней на материал; если продавец даёт образец — не покупать.</li><li>Заказ остальных, репетиция двух хуков на телефон.</li></ul></div>
+      <div class="card"><h3>Неделя 3</h3><span>22⁠–⁠27 сентября</span><ul><li>Первая съёмка пачкой — 7 роликов, монтаж.</li><li>Старт ежедневной публикации.</li><li>Ролики с меткой товара — на модерацию, публиковать в 3 дня после одобрения.</li></ul></div>
+      <div class="card"><h3>Неделя 4</h3><span>28 сентября — 4 октября</span><ul><li>Вторая съёмка.</li><li>Разбор: какие два формата дают досмотры и клики — их удваиваем.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s10">
+  <div class="inner">
+    <p class="eyebrow">9 · Что считать</p>
+    <h2 class="title">Метрики и ориентиры Марины</h2>
+    <div class="stats">
+      <div class="stat"><b>30 тыс.</b><span>медиана просмотров Марины при 79 тыс. подписчиков</span></div>
+      <div class="stat"><b>37</b><span>её роликов больше 100 тыс. за 14 месяцев</span></div>
+      <div class="stat"><b>10 млн</b><span>просмотров за месяц — её август, цена цели 300 тыс. ₽</span></div>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>Считаем каждую неделю</h3>
+        <ul>
+          <li>Клики и заказы по меткам Ozon.</li>
+          <li>Число вопросов «где купить».</li>
+          <li>Досмотры по форматам А, Б, В.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Первый месяц</h3>
+        <ul>
+          <li>Около 30 роликов, порог 100 подписчиков для шопсов, первые заказы.</li>
+          <li>Цель 300 тыс. ₽ в месяц требует её августа: 10 млн просмотров и 8 товарных хитов.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s11">
+  <div class="inner">
+    <p class="eyebrow">10 · Риски</p>
+    <h2 class="title">Что может сломаться и что делаем заранее</h2>
+    <div class="cols">
+      <div>
+        <ul class="warnlist">
+          <li>Бельё тянет мужской трафик и хейт, а покупают женщины — подача только «как сидит» и «девочки».</li>
+          <li>Метка 18+ режет показы.</li>
+          <li>Метки шопсов истекают через месяц — перевыкладывать лучшие ролики.</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="warnlist">
+          <li>Сбои выплат AdBlogger встречаются в отзывах.</li>
+          <li>Чужие описания и фото карточек — нарушение правила оригинальности.</li>
+          <li>Цель 300 тыс. ₽ через месяц не подтверждена данными — решение принято с этим риском.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s12">
+  <div class="inner">
+    <p class="eyebrow">Эта неделя · 9⁠–⁠15 сентября</p>
+    <h2 class="title">Четыре дела до первой съёмки</h2>
+    <div class="cards">
+      <div class="card"><h3>Самозанятость</h3><p>Оформить на жену: выплаты сразу и без минимума.</p></div>
+      <div class="card"><h3>100 подписчиков</h3><p>Открытое сообщество или страница и хотя бы одна публикация за 30 дней — порог шопсов.</p></div>
+      <div class="card"><h3>8 товаров</h3><p>Лосины, топы, джинсы, платья до 3000 ₽ с живыми карточками на Ozon.</p></div>
+      <div class="card"><h3>Угол и свет</h3><p>Стена, штатив на уровне груди, лампа; распечатать десять хуков.</p></div>
+    </div>
+    <p class="note">Источники: 02-Концепция-сообщества-жены.md, adblogger-rules-check.md, 01-Разбор-конкурента-kutsenkomary.md.</p>
+  </div>
+</section>
+
+</div>
+
+<nav class="ctl" aria-label="Навигация по слайдам">
+  <button class="prev" type="button" aria-label="Предыдущий слайд">↑</button>
+  <span class="count">1 / 12</span>
+  <button class="next" type="button" aria-label="Следующий слайд">↓</button>
+</nav>
+
+<script>
+(function(){
+  var deck=document.querySelector(".deck"), slides=Array.prototype.slice.call(document.querySelectorAll(".slide")), count=document.querySelector(".count"), cur=0;
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function update(fromScroll){var vh=deck.clientHeight||window.innerHeight||600; var st=deck.scrollTop+vh*0.35; var i=0; for(var k=0;k<slides.length;k++){if(slides[k].offsetTop<=st){i=k;}} if(i!==cur||!count.getAttribute("data-set")){cur=i; count.textContent=(cur+1)+" / "+slides.length; count.setAttribute("data-set","1"); if(fromScroll){try{history.replaceState(null,"","#"+slides[cur].id);}catch(err){}}}}
+  var ticking=false; deck.addEventListener("scroll",function(){if(!ticking){ticking=true; requestAnimationFrame(function(){ticking=false; update(true);});}}); update(); window.addEventListener("resize",function(){jump(); update();}); window.addEventListener("load",function(){jump(); update();}); window.addEventListener("hashchange",function(){jump(); update();});
+  function go(i){i=Math.max(0,Math.min(slides.length-1,i)); slides[i].scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});}
+  document.querySelector(".prev").addEventListener("click",function(){go(cur-1);});
+  document.querySelector(".next").addEventListener("click",function(){go(cur+1);});
+  addEventListener("keydown",function(e){
+    if(e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if(["ArrowDown","ArrowRight","PageDown"," "].indexOf(e.key)>=0){e.preventDefault();go(cur+1);}
+    else if(["ArrowUp","ArrowLeft","PageUp"].indexOf(e.key)>=0){e.preventDefault();go(cur-1);}
+    else if(e.key==="Home"){go(0);} else if(e.key==="End"){go(slides.length-1);}
+  });
+  function jump(){if(!location.hash)return; var t=document.querySelector(location.hash); if(!t)return; var prev=deck.style.scrollBehavior; deck.style.scrollBehavior="auto"; deck.scrollTop=t.offsetTop; deck.style.scrollBehavior=prev;}
+  jump(); update(); setTimeout(function(){jump(); update();},150); if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){setTimeout(function(){jump(); update();},50);});}
+})();
+</script>
+
+</body>
+</html>

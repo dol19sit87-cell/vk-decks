@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Разбор конкурента Мари</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Golos+Text:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#FBF8F9; --surface:#FFFFFF; --tint:#F3E8EC; --ink:#26161F; --muted:#6F5C67; --line:#E6D8DE;
+  --accent:#7A2E4F; --accent-2:#B86A85; --bar:#9C4A6C; --bar-hi:#5E1F3B;
+  --ok:#2F6B45; --warn:#A8501B; --capsbg:#2A1622; --capsink:#FFFFFF; --shadow:0 4px 16px rgba(42,22,34,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1A1116; --surface:#241820; --tint:#2E1F27; --ink:#F5ECF0; --muted:#B79FAB; --line:#3D2A34;
+    --accent:#E48DB0; --accent-2:#C77A97; --bar:#C8789A; --bar-hi:#F0A6C3;
+    --ok:#7FC496; --warn:#F0A26B; --capsbg:#0F0A0D; --capsink:#FFFFFF; --shadow:0 4px 16px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1A1116; --surface:#241820; --tint:#2E1F27; --ink:#F5ECF0; --muted:#B79FAB; --line:#3D2A34;
+  --accent:#E48DB0; --accent-2:#C77A97; --bar:#C8789A; --bar-hi:#F0A6C3;
+  --ok:#7FC496; --warn:#F0A26B; --capsbg:#0F0A0D; --capsink:#FFFFFF; --shadow:0 4px 16px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.45}
+.deck{height:100dvh;overflow-y:auto;scroll-snap-type:y proximity;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){.deck{scroll-behavior:auto}}
+.slide{min-height:100dvh;scroll-snap-align:start;display:grid;place-items:center;padding:clamp(20px,4vw,48px) clamp(16px,5vw,64px)}
+.inner{width:min(1100px,100%);display:flex;flex-direction:column;gap:clamp(14px,2vw,22px)}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+.title{font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:700;font-size:clamp(23px,3.3vw,38px);line-height:1.12;text-wrap:balance;margin:0}
+.lead{font-size:clamp(16px,1.45vw,19px);margin:0;max-width:64ch}
+p{margin:0}
+ul{margin:0;padding-left:1.15em}
+li{margin:0 0 7px}
+li:last-child{margin-bottom:0}
+.check li::marker{content:"✓  ";color:var(--ok);font-weight:700}
+.cross li::marker{content:"✕  ";color:var(--warn);font-weight:700}
+.note{color:var(--muted);font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.card h3{font-size:15px;font-weight:700;margin:0 0 6px}
+.card p,.card li{font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
+.stat b{display:block;font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:900;font-size:clamp(22px,3vw,40px);line-height:1.05;color:var(--accent);font-variant-numeric:tabular-nums;min-width:0}
+.stat span{display:block;color:var(--muted);font-size:14px;margin-top:6px}
+.caps{background:var(--capsbg);color:var(--capsink);font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(17px,2.3vw,28px);line-height:1.15;padding:20px 24px;border-radius:6px;text-align:center}
+.caps small{display:block;font-family:"Golos Text",system-ui,sans-serif;font-weight:500;text-transform:none;font-size:13px;opacity:.82;margin-top:10px;letter-spacing:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.cols h3,.col h3{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+@media (max-width:720px){.cols{grid-template-columns:1fr}}
+.hook{display:grid;grid-template-columns:7.2em 1fr;gap:14px;align-items:baseline;padding:9px 0;border-top:1px solid var(--line);font-size:15px}
+.hook:last-child{border-bottom:1px solid var(--line)}
+.hook b{font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;font-size:clamp(14px,1.4vw,18px);white-space:nowrap}
+.hook em{color:var(--muted);font-style:normal}
+@media (max-width:520px){.hook{grid-template-columns:1fr;gap:2px}}
+.flow{display:flex;flex-wrap:wrap;gap:8px}
+.flow div{background:var(--tint);border-radius:8px;padding:8px 12px;font-size:14px;flex:1 1 150px}
+.flow div b{display:block;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.tint{background:var(--tint);border-radius:10px;padding:14px 18px}
+.chart-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:760px){.chart-wrap{grid-template-columns:1fr}}
+.chart{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 12px 6px}
+.chart h3{font-size:14px;font-weight:600;margin:0 0 4px}
+.chart .sub{font-size:12px;color:var(--muted);margin:0 0 6px}
+.chart svg{width:100%;height:auto;display:block}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .ax{fill:var(--muted);font-size:10px;font-family:"Golos Text",system-ui,sans-serif}
+.chart .val{fill:var(--ink);font-size:11px;font-weight:600;font-family:"Golos Text",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.chart .bar{fill:var(--bar)}
+.chart .bar.hi{fill:var(--bar-hi)}
+.chart .hit{fill:transparent}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;padding:6px 9px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-110%);opacity:0;transition:opacity .12s}
+.tip.on{opacity:1}
+details{font-size:14px}
+details summary{cursor:pointer;color:var(--muted)}
+table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;margin-top:8px}
+td,th{padding:3px 10px 3px 0;text-align:right;border-bottom:1px solid var(--line)}
+td:first-child,th:first-child{text-align:left}
+.tablebox{overflow-x:auto}
+.cover{min-height:100dvh}
+.cover .inner{gap:clamp(18px,3vw,32px)}
+.ctl{position:fixed;right:14px;bottom:14px;display:flex;gap:6px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 8px;font-size:13px;box-shadow:var(--shadow);font-variant-numeric:tabular-nums;z-index:5}
+.ctl button{border:0;background:var(--tint);color:var(--ink);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1}
+.ctl button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ctl .count{min-width:52px;text-align:center;color:var(--muted)}
+@media print{
+  .deck{height:auto;overflow:visible}
+  .slide{min-height:auto;break-after:page;page-break-after:always}
+  .ctl{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<section class="slide cover" id="s1">
+  <div class="inner">
+    <p class="eyebrow">Разбор конкурента · данные 7⁠–⁠8 сентября 2026</p>
+    <h1 class="title">«Распаковки с Мари / WB / ОБЗОРЫ»</h1>
+    <p class="lead">vk.com/kutsenkomary — Марина Куценко, Краснодар. Обзоры одежды на размер 50⁠–⁠52 с артикулами WB и метками Ozon. Разобрано: 242 клипа, 155 постов стены, 14 расшифрованных роликов.</p>
+    <div class="stats">
+      <div class="stat"><b>79,2 тыс.</b><span>подписчиков, +29 тыс. за 2,5 месяца</span></div>
+      <div class="stat"><b>20,5 млн</b><span>просмотров на 242 клипа</span></div>
+      <div class="stat"><b>1 в день</b><span>ритм публикаций, 187 дней с клипами</span></div>
+      <div class="stat"><b>3,0 млн</b><span>лучший ролик: гель для душа</span></div>
+    </div>
+    <div class="caps">Муж любит, когда я мою ему ноги<small>Первая фраза ролика на 3,0 млн просмотров. Товар (гель для душа) — на третьей фразе.</small></div>
+  </div>
+</section>
+
+<section class="slide" id="s2">
+  <div class="inner">
+    <p class="eyebrow">1 · Кто это</p>
+    <h2 class="title">Реальное тело и история −23 кг — главный актив канала</h2>
+    <div class="cols">
+      <div>
+        <ul>
+          <li>Марина Куценко, Краснодар. «Блогер уже 8 лет». Рост 166, похудела с 95 до 72⁠–⁠74 кг, сейчас размер 50⁠–⁠52.</li>
+          <li>Муж Василий ведёт парное сообщество @big_man_vasiliy (мужские образы плюс-сайз): отмечают друг друга, снимают скетчи вместе.</li>
+          <li>Двое и больше детей; семья и быт — часть контента.</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li>Сообщество id 226119198. 50 тыс. подписчиков было 20.06.2026, 79,2 тыс. — 7.09.2026.</li>
+          <li>Первый клип 3.07.2025. Стена в нынешнем виде с 2.10.2025 (день переноса).</li>
+          <li>Инстаграм @kutsenko.mary, личная страница vk.com/id81533146, телеграм-канал «все ссылки в канале».</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s3">
+  <div class="inner">
+    <p class="eyebrow">2 · Тематика</p>
+    <h2 class="title">Четыре столпа контента</h2>
+    <div class="cards">
+      <div class="card"><h3>Образы 50⁠–⁠52 с артикулами WB</h3><p>Основа: 196 из 242 клипов содержат артикулы или «артикулы в описании».</p></div>
+      <div class="card"><h3>История тела</h3><p>«До/после» −23 кг, бодипозитив: #допосле в 68 клипах, #лучшаяверсиясебя в 41, фотосессии в 95 кг.</p></div>
+      <div class="card"><h3>Товарные ролики через шопсы</h3><p>Гель для душа, чулки, лосины, бюстгальтер, боди, беговая дорожка. Описание — текст карточки товара. Видны только за последние 30 дней.</p></div>
+      <div class="card"><h3>Семья и быт</h3><p>Муж, дети, отпуск (Египет, июль 2026), цветы, «обычный вечер нашей семейки».</p></div>
+    </div>
+    <div class="tint">
+      <p><strong>Закреп (3.07.2026):</strong> «честные обзоры WB и Ozon; находки для размера 50⁠–⁠52; вещи, которые реально стоят своих денег; готовые образы на каждый день; товары, которые покупать точно не стоит».</p>
+      <p class="note">Хэштеги: #допосле 68 · #лучшаяверсиясебя 41 · #wildberries 38 · #reels 38 · #wb 36 · #обзор 33 · #большиеразмеры 30 · #плюссайз 25</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s4">
+  <div class="inner">
+    <p class="eyebrow">3 · Аудитория</p>
+    <h2 class="title">Женщины 30⁠–⁠50, размер 48⁠–⁠56, покупают по артикулу</h2>
+    <div class="cols">
+      <div>
+        <h3>Кто смотрит</h3>
+        <ul>
+          <li>Почти полностью женщины. Ядро 30⁠–⁠50 лет: имена комментаторов Елена 89, Марина 75, Ольга 36, Анастасия 31, Екатерина 30.</li>
+          <li>Размеры 48⁠–⁠56: «я 52⁠–⁠54», «лично я 48 размера». Запросы «до 60/66/72» собирают отдельные подборки.</li>
+          <li>Темы: «после трёх беременностей», выпускной у 17-летних детей. География — Россия, регионы, юг.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Как себя ведут</h3>
+        <ul>
+          <li>Спрашивают артикул под каждой вещью, даже «от мужа досталась». Покупают по артикулу, а не по ссылке.</li>
+          <li>Одна суперактивная комментаторша (Диляра, 272 комментария) работает как модератор-фанат.</li>
+          <li>Мужчины появляются только под чулками и ногами — хейт и «мужской» трафик от 18+-тем.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">Статистика сообщества закрыта. Оценка по 614 уникальным комментаторам (1 341 комментарий) и темам.</p>
+  </div>
+</section>
+
+<section class="slide" id="s5">
+  <div class="inner">
+    <p class="eyebrow">4 · Монетизация</p>
+    <h2 class="title">Как зарабатывает: шопсы Ozon, товарные клипы, бренды</h2>
+    <div class="cards">
+      <div class="card"><h3>Шопсы Ozon (AdBlogger)</h3><p>14 постов «Перейти на Ozon» за последние 30 дней. Лучшие: лосины — 381 лайк и 109 репостов; бюджетные топы — 190 лайков; чулки «18+» — 93 репоста.</p></div>
+      <div class="card"><h3>Товарные клипы с карточкой</h3><p>8 штук в августе 2026 дали 10,6 млн просмотров: гель SOKOLOV 3,0 млн, спортивный костюм 1,76 млн, чулки 1,23 млн, лосины 781 тыс. Хук личный, описание — текст продавца.</p></div>
+      <div class="card"><h3>Артикулы WB без трекинга</h3><p>196 клипов. Прямого заработка не видно — работает на доверие и на бренд-интеграции.</p></div>
+      <div class="card"><h3>Бренды и перекрёстный трафик</h3><p>4forms, DIVNO, Birka Art, SOKOLOV, «Мой день», Demix. Плюс муж, телеграм-канал и розыгрыш (октябрь 2025: 3 629 комментариев).</p></div>
+    </div>
+    <p class="note">Метки и ссылки шопсов живут около месяца, в старых роликах их уже не видно. Когда она подключила шопсы, по открытым данным не определить.</p>
+  </div>
+</section>
+
+<section class="slide" id="s6">
+  <div class="inner">
+    <p class="eyebrow">5 · Ритм</p>
+    <h2 class="title">Один клип в день, пик публикаций в 12⁠–⁠13 по Москве</h2>
+    <div class="stats">
+      <div class="stat"><b>187</b><span>дней с публикациями</span></div>
+      <div class="stat"><b>151</b><span>день ровно с одним клипом, 27 дней — с двумя</span></div>
+      <div class="stat"><b>31 с</b><span>медиана длительности</span></div>
+      <div class="stat"><b>12⁠–⁠13 ч</b><span>пик публикаций (67 клипов), затем 15⁠–⁠17 ч (49)</span></div>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>Клипы</h3>
+        <ul>
+          <li>Последние 8 недель: 8, 10, 7, 7, 6, 5, 7, 3 клипа в неделю.</li>
+          <li>Товарные хиты 19⁠–⁠40 с, музыкальные переодевания 11⁠–⁠17 с, влоги 2⁠–⁠6 мин.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Стена</h3>
+        <ul>
+          <li>С апреля 2026 — пост раз в день-два: фото о себе и семье, тизеры клипов, Ozon-посты. Медиана лайков 94.</li>
+          <li>Лучшие посты личные: «Это что я? Как красиво» 595, «Фотосессия в весе 95 кг» 571, «Что я ем, чтобы не вернуться в 95 кг» 498.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s7">
+  <div class="inner">
+    <p class="eyebrow">6 · Просмотры по месяцам</p>
+    <h2 class="title">Восемь месяцев тишины, перелом в марте, взрыв в августе</h2>
+    <div class="chart-wrap">
+      <div class="chart" id="c-median"><h3>Медиана просмотров клипа, тыс.</h3><p class="sub">июль 2025 — 6 сентября 2026</p></div>
+      <div class="chart" id="c-total"><h3>Сумма просмотров за месяц, млн</h3><p class="sub">август 2026 — 10,6 млн с 8 товарных клипов</p></div>
+    </div>
+    <p class="note">Июль 2025 — февраль 2026: 3⁠–⁠11 тыс. медианы при 6⁠–⁠21 клипе в месяц. Март 2026: 27 клипов, медиана 30 тыс. — начались говорящие хуки вместо музыкальных переодеваний. Август 2026: товарные клипы с карточкой.</p>
+    <details><summary>Таблица по месяцам</summary>
+      <div class="tablebox"><table id="tbl"><thead><tr><th>Месяц</th><th>Клипов</th><th>Медиана</th><th>Максимум</th><th>Сумма</th></tr></thead><tbody></tbody></table></div>
+    </details>
+  </div>
+</section>
+
+<section class="slide" id="s8">
+  <div class="inner">
+    <p class="eyebrow">6 · Что дают 242 клипа</p>
+    <h2 class="title">Медиана 30,8 тыс., каждый седьмой клип — больше 100 тыс.</h2>
+    <div class="stats">
+      <div class="stat"><b>30,8 тыс.</b><span>медиана просмотров</span></div>
+      <div class="stat"><b>60 тыс.</b><span>верхний квартиль</span></div>
+      <div class="stat"><b>127 тыс.</b><span>порог топ-10 %</span></div>
+      <div class="stat"><b>37</b><span>клипов ≥ 100 тыс.; 73 клипа ≥ 50 тыс.</span></div>
+    </div>
+    <ul>
+      <li>34 клипа меньше 5 тыс. — почти все из 2025 года.</li>
+      <li>Лайки: медиана 456 на клип. Комментарии: медиана 19.</li>
+      <li>Все десять лучших клипов — либо разговорный хук, либо переодевания под музыку с вопросом текстом.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide" id="s9">
+  <div class="inner">
+    <p class="eyebrow">7 · Хуки-хиты</p>
+    <h2 class="title">Первые слова роликов, дословно из расшифровки</h2>
+    <div>
+      <div class="hook"><b>3,0 млн</b><span>«Муж любит, когда я мою ему ноги. Говорит, что после рабочего дня это моментально его восстанавливает…» <em>→ гель для душа на третьей фразе</em></span></div>
+      <div class="hook"><b>1,76 млн</b><span>«Толстым людям нельзя носить белый цвет. Он же меня ещё больше сделает, правильно? Я с этим не согласна» <em>→ белый костюм</em></span></div>
+      <div class="hook"><b>1,23 млн</b><span>«Это видео только для женщин. Мужчины сразу пролистните, потому что рыхлая девочка будет показывать чулки» <em>→ чулки с поясом</em></span></div>
+      <div class="hook"><b>781 тыс.</b><span>«Девочки, я нашла на нашу фигурку идеальные лосины. Крой клёш книзу, давайте посмотрим, как сидят на обычной женской фигуре» <em>→ резинка, длина при росте 166, образ</em></span></div>
+      <div class="hook"><b>693 тыс.</b><span>«Подтяжка груди без имплантов — стоит ли оно того? У меня появился птоз 3 степени…» <em>→ бюстгальтер</em></span></div>
+      <div class="hook"><b>671 тыс.</b><span>«Эти лосины ищут все: во-первых, цена 600 рублей, во-вторых, скрывают недостатки, в-третьих, размерный ряд до 56» <em>→ лосины</em></span></div>
+      <div class="hook"><b>583 тыс.</b><span>Без речи: музыка, переодевания, вопрос текстом «Так какой у меня размер?» <em>→ артикулы в описании</em></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s10">
+  <div class="inner">
+    <p class="eyebrow">7 · Формулы и скелет</p>
+    <h2 class="title">Шесть формул хука и один скелет ролика</h2>
+    <div class="cols">
+      <div>
+        <h3>Формулы первой фразы</h3>
+        <ul>
+          <li>Боль → «показываю свой арсенал».</li>
+          <li>Стереотип о полных → «я не согласна» → примерка.</li>
+          <li>«Только для женщин, мужчины пролистните».</li>
+          <li>Список «во-первых, во-вторых, в-третьих» с ценой в первой фразе.</li>
+          <li>Интимная личная деталь (муж, грудь, вес) → товар на третьей фразе.</li>
+          <li>Вопрос-выбор текстом поверх переодеваний.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Говорящий ролик, 20⁠–⁠40 с</h3>
+        <div class="flow">
+          <div><b>0⁠–⁠3 с</b>хук, заголовок белым капсом сверху</div>
+          <div><b>дальше</b>«давайте посмотрим, как сидит»</div>
+          <div><b>середина</b>2⁠–⁠4 свойства на теле: резинка, длина при росте, цена</div>
+          <div><b>финал</b>собранный образ; артикулы в описании, призыва в речи почти нет</div>
+        </div>
+        <p class="note" style="margin-top:10px">Съёмка: штатив, один домашний угол, жёсткие склейки, подписи мелким обычным шрифтом, беговая дорожка как подиум.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s11">
+  <div class="inner">
+    <p class="eyebrow">8 · Выводы</p>
+    <h2 class="title">Что копировать, что нет</h2>
+    <div class="cols">
+      <div>
+        <h3>Копировать</h3>
+        <ul class="check">
+          <li>Ежедневный ритм и терпение: 8 месяцев по 3⁠–⁠7 тыс. просмотров до взлёта.</li>
+          <li>Один размер и одна фигура в названии — аудитория сразу узнаёт себя.</li>
+          <li>Говорящий хук с болью или стереотипом; товар не раньше третьей фразы.</li>
+          <li>Стена как витрина шопсов: короткий пост, «Перейти на Ozon», 1⁠–⁠3 фото.</li>
+          <li>Ответ на каждый вопрос «артикул?» — это и есть продажи.</li>
+          <li>Парные аккаунты мужа и жены.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Не копировать</h3>
+        <ul class="cross">
+          <li>AI-персона вместо реального человека: правило шопсов требует видеть и слышать автора. Решение — в кадре жена сама.</li>
+          <li>Текст продавца в описании без личного хука в кадре — не работает.</li>
+          <li>18+-темы: дают охват и мужской хейт одновременно.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s12">
+  <div class="inner">
+    <p class="eyebrow">Дальше</p>
+    <h2 class="title">Три числа, которые надо помнить</h2>
+    <div class="stats">
+      <div class="stat"><b>8 мес.</b><span>до первого взлёта при клипе в день</span></div>
+      <div class="stat"><b>3-я фраза</b><span>место товара в ролике</span></div>
+      <div class="stat"><b>30 дней</b><span>живёт метка шопса</span></div>
+    </div>
+    <p class="lead">Следующий шаг — концепция сообщества жены: размер 42⁠–⁠44, всё до 3000 ₽, съёмка пачкой раз в неделю. Это вторая презентация.</p>
+    <p class="note">Источники: файлы 01-Разбор-конкурента-kutsenkomary.md, data/clips.csv, data/posts.psv. Все числа — открытые страницы VK без входа.</p>
+  </div>
+</section>
+
+</div>
+
+<nav class="ctl" aria-label="Навигация по слайдам">
+  <button class="prev" type="button" aria-label="Предыдущий слайд">↑</button>
+  <span class="count">1 / 12</span>
+  <button class="next" type="button" aria-label="Следующий слайд">↓</button>
+</nav>
+
+<script>
+(function(){
+  var months=["июл","авг","сен","окт","ноя","дек","янв","фев","мар","апр","май","июн","июл","авг","сен"];
+  var full=["2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09 (1⁠–⁠6)"];
+  var clips=[19,21,9,7,10,10,6,14,27,12,18,28,21,32,8];
+  var median=[3.4,3.9,6.3,6.9,6.4,7.0,9.4,11.3,30.0,45.3,95.3,63.5,53.7,83.4,26.9];
+  var maxv=["11 тыс.","10 тыс.","24 тыс.","19 тыс.","8 тыс.","12 тыс.","37 тыс.","31 тыс.","143 тыс.","529 тыс.","583 тыс.","356 тыс.","350 тыс.","3,02 млн","50 тыс."];
+  var total=[0.075,0.091,0.073,0.058,0.067,0.071,0.099,0.218,1.02,0.99,2.37,2.79,1.82,10.59,0.214];
+  var sumTxt=["75 тыс.","91 тыс.","73 тыс.","58 тыс.","67 тыс.","71 тыс.","99 тыс.","218 тыс.","1,02 млн","0,99 млн","2,37 млн","2,79 млн","1,82 млн","10,59 млн","214 тыс."];
+
+  function fmt(v,d){return v.toFixed(d).replace(".",",");}
+  function bars(el,vals,opt){
+    var W=520,H=230,pl=34,pr=8,pt=18,pb=30,n=vals.length;
+    var max=Math.max.apply(null,vals), top=opt.top;
+    var iw=W-pl-pr, bw=iw/n, gap=2;
+    var ns="http://www.w3.org/2000/svg";
+    var svg=document.createElementNS(ns,"svg"); svg.setAttribute("viewBox","0 0 "+W+" "+H); svg.setAttribute("role","img"); svg.setAttribute("aria-label",opt.aria);
+    var y=function(v){return pt+(H-pt-pb)*(1-v/top);};
+    var ticks=opt.ticks;
+    ticks.forEach(function(t){
+      var l=document.createElementNS(ns,"line"); l.setAttribute("x1",pl); l.setAttribute("x2",W-pr); l.setAttribute("y1",y(t)); l.setAttribute("y2",y(t)); l.setAttribute("class","grid"); svg.appendChild(l);
+      var tx=document.createElementNS(ns,"text"); tx.setAttribute("x",pl-6); tx.setAttribute("y",y(t)+3.5); tx.setAttribute("text-anchor","end"); tx.setAttribute("class","ax"); tx.textContent=opt.tick(t); svg.appendChild(tx);
+    });
+    var tip=document.createElement("div"); tip.className="tip"; el.appendChild(tip);
+    vals.forEach(function(v,i){
+      var x0=pl+i*bw+gap/2, w=bw-gap, y0=y(v), h=H-pb-y0, r=Math.min(4,w/2,h);
+      var p=document.createElementNS(ns,"path");
+      p.setAttribute("d","M"+x0+" "+(H-pb)+" V"+(y0+r)+" a"+r+" "+r+" 0 0 1 "+r+" "+(-r)+" H"+(x0+w-r)+" a"+r+" "+r+" 0 0 1 "+r+" "+r+" V"+(H-pb)+" Z");
+      p.setAttribute("class","bar"+(opt.hi.indexOf(i)>=0?" hi":"")); svg.appendChild(p);
+      if(opt.lbl.indexOf(i)>=0){var t=document.createElementNS(ns,"text"); t.setAttribute("x",x0+w/2); t.setAttribute("y",y0-4); t.setAttribute("text-anchor","middle"); t.setAttribute("class","val"); t.textContent=opt.label(i); svg.appendChild(t);}
+      var m=document.createElementNS(ns,"text"); m.setAttribute("x",x0+w/2); m.setAttribute("y",H-pb+13); m.setAttribute("text-anchor","middle"); m.setAttribute("class","ax"); m.textContent=months[i]; svg.appendChild(m);
+      if(i===0||i===6){var yr=document.createElementNS(ns,"text"); yr.setAttribute("x",x0+w/2); yr.setAttribute("y",H-pb+24); yr.setAttribute("text-anchor","middle"); yr.setAttribute("class","ax"); yr.textContent=i===0?"2025":"2026"; svg.appendChild(yr);}
+      var hit=document.createElementNS(ns,"rect"); hit.setAttribute("x",pl+i*bw); hit.setAttribute("y",pt); hit.setAttribute("width",bw); hit.setAttribute("height",H-pt-pb); hit.setAttribute("class","hit");
+      var show=function(){var box=el.getBoundingClientRect(), sb=svg.getBoundingClientRect(); var sx=sb.width/W; tip.textContent=full[i]+": "+opt.tipText(i); tip.style.left=(sb.left-box.left+(x0+w/2)*sx)+"px"; tip.style.top=(sb.top-box.top+y0*sx)+"px"; tip.classList.add("on");};
+      var hide=function(){tip.classList.remove("on");};
+      hit.addEventListener("mouseenter",show); hit.addEventListener("mousemove",show); hit.addEventListener("mouseleave",hide);
+      hit.addEventListener("touchstart",function(e){show(); setTimeout(hide,1800);},{passive:true});
+      svg.appendChild(hit);
+    });
+    el.appendChild(svg);
+  }
+  bars(document.getElementById("c-median"),median,{top:100,ticks:[0,25,50,75,100],tick:function(t){return t;},hi:[8,13],lbl:[8,10,13],label:function(i){return fmt(median[i],0);},tipText:function(i){return "медиана "+fmt(median[i],1)+" тыс., клипов "+clips[i];},aria:"Медиана просмотров клипа по месяцам"});
+  bars(document.getElementById("c-total"),total,{top:12,ticks:[0,3,6,9,12],tick:function(t){return t;},hi:[13],lbl:[8,11,13],label:function(i){return fmt(total[i],1);},tipText:function(i){return "сумма "+sumTxt[i]+", клипов "+clips[i];},aria:"Сумма просмотров за месяц"});
+  var tb=document.querySelector("#tbl tbody");
+  full.forEach(function(m,i){var tr=document.createElement("tr"); tr.innerHTML="<td>"+m+"</td><td>"+clips[i]+"</td><td>"+fmt(median[i],1)+" тыс.</td><td>"+maxv[i]+"</td><td>"+sumTxt[i]+"</td>"; tb.appendChild(tr);});
+
+  var deck=document.querySelector(".deck"), slides=Array.prototype.slice.call(document.querySelectorAll(".slide")), count=document.querySelector(".count"), cur=0;
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function update(fromScroll){var vh=deck.clientHeight||window.innerHeight||600; var st=deck.scrollTop+vh*0.35; var i=0; for(var k=0;k<slides.length;k++){if(slides[k].offsetTop<=st){i=k;}} if(i!==cur||!count.getAttribute("data-set")){cur=i; count.textContent=(cur+1)+" / "+slides.length; count.setAttribute("data-set","1"); if(fromScroll){try{history.replaceState(null,"","#"+slides[cur].id);}catch(err){}}}}
+  var ticking=false; deck.addEventListener("scroll",function(){if(!ticking){ticking=true; requestAnimationFrame(function(){ticking=false; update(true);});}}); update(); window.addEventListener("resize",function(){jump(); update();}); window.addEventListener("load",function(){jump(); update();}); window.addEventListener("hashchange",function(){jump(); update();});
+  function go(i){i=Math.max(0,Math.min(slides.length-1,i)); slides[i].scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});}
+  document.querySelector(".prev").addEventListener("click",function(){go(cur-1);});
+  document.querySelector(".next").addEventListener("click",function(){go(cur+1);});
+  addEventListener("keydown",function(e){
+    if(e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if(["ArrowDown","ArrowRight","PageDown"," "].indexOf(e.key)>=0){e.preventDefault();go(cur+1);}
+    else if(["ArrowUp","ArrowLeft","PageUp"].indexOf(e.key)>=0){e.preventDefault();go(cur-1);}
+    else if(e.key==="Home"){go(0);} else if(e.key==="End"){go(slides.length-1);}
+  });
+  function jump(){if(!location.hash)return; var t=document.querySelector(location.hash); if(!t)return; var prev=deck.style.scrollBehavior; deck.style.scrollBehavior="auto"; deck.scrollTop=t.offsetTop; deck.style.scrollBehavior=prev;}
+  jump(); update(); setTimeout(function(){jump(); update();},150); if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){setTimeout(function(){jump(); update();},50);});}
+})();
+</script>
+
+</body>
+</html>
