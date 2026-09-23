@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Разбор пяти роликов Ольги</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Golos+Text:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#FBF8F9; --surface:#FFFFFF; --tint:#F3E8EC; --ink:#26161F; --muted:#6F5C67; --line:#E6D8DE;
+  --accent:#7A2E4F; --accent-2:#B86A85;
+  --ok:#2F6B45; --warn:#A8501B; --capsbg:#2A1622; --capsink:#FFFFFF; --shadow:0 4px 16px rgba(42,22,34,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1A1116; --surface:#241820; --tint:#2E1F27; --ink:#F5ECF0; --muted:#B79FAB; --line:#3D2A34;
+    --accent:#E48DB0; --accent-2:#C77A97;
+    --ok:#7FC496; --warn:#F0A26B; --capsbg:#0F0A0D; --capsink:#FFFFFF; --shadow:0 4px 16px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1A1116; --surface:#241820; --tint:#2E1F27; --ink:#F5ECF0; --muted:#B79FAB; --line:#3D2A34;
+  --accent:#E48DB0; --accent-2:#C77A97;
+  --ok:#7FC496; --warn:#F0A26B; --capsbg:#0F0A0D; --capsink:#FFFFFF; --shadow:0 4px 16px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.45}
+.deck{height:100dvh;overflow-y:auto;scroll-snap-type:y proximity;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){.deck{scroll-behavior:auto}}
+.slide{min-height:100dvh;scroll-snap-align:start;display:grid;grid-template-columns:minmax(0,1100px);justify-content:center;align-content:center;padding:clamp(20px,4vw,48px) clamp(16px,5vw,64px)}
+.inner{width:100%;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2vw,22px)}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+.title{font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:700;font-size:clamp(23px,3.3vw,38px);line-height:1.12;text-wrap:balance;margin:0}
+.lead{font-size:clamp(16px,1.45vw,19px);margin:0;max-width:64ch}
+p{margin:0}
+ul{margin:0;padding-left:1.15em}
+li{margin:0 0 7px}
+li:last-child{margin-bottom:0}
+.check li::marker{content:"✓  ";color:var(--ok);font-weight:700}
+.warnlist li::marker{content:"!  ";color:var(--warn);font-weight:700}
+.note{color:var(--muted);font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.card h3{font-size:15px;font-weight:700;margin:0 0 6px}
+.card p,.card li{font-size:15px}
+.card .k{font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:700;color:var(--accent);font-size:13px;letter-spacing:.02em;margin:0 0 4px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
+.stat b{display:block;font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:900;font-size:clamp(22px,3vw,40px);line-height:1.05;color:var(--accent);font-variant-numeric:tabular-nums;min-width:0}
+.stat span{display:block;color:var(--muted);font-size:14px;margin-top:6px}
+.caps{background:var(--capsbg);color:var(--capsink);font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(17px,2.3vw,28px);line-height:1.15;padding:20px 24px;border-radius:6px;text-align:center}
+.caps small{display:block;font-family:"Golos Text",system-ui,sans-serif;font-weight:500;text-transform:none;font-size:13px;opacity:.82;margin-top:10px;letter-spacing:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.cols h3,.col h3{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+@media (max-width:720px){.cols{grid-template-columns:1fr}}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.vs{grid-template-columns:1fr}}
+.vs .card{display:flex;flex-direction:column;gap:6px}
+.vs .big{font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:900;font-size:clamp(22px,3vw,34px);color:var(--accent);line-height:1.1}
+.hooks{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;counter-reset:h}
+@media (max-width:720px){.hooks{grid-template-columns:1fr}}
+.hooks div{padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.hooks div b{display:block;font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;color:var(--accent);margin-bottom:3px;letter-spacing:.02em}
+.flow{display:flex;flex-wrap:wrap;gap:8px}
+.flow div{background:var(--tint);border-radius:8px;padding:8px 12px;font-size:14px;flex:1 1 140px}
+.flow div b{display:block;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.tint{background:var(--tint);border-radius:10px;padding:14px 18px}
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:860px){.tl{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.tl{grid-template-columns:1fr}}
+.tl .card h3{font-family:"Unbounded","Arial Black",Arial,sans-serif;font-weight:700;color:var(--accent);font-size:14px}
+.tl .card span{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+.money{border:1px solid var(--warn);border-radius:10px;padding:14px 18px}
+.money strong{color:var(--warn)}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);font-size:14px}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+td{font-variant-numeric:tabular-nums}
+.slide a{color:var(--accent)}
+.cover .inner{gap:clamp(18px,3vw,32px)}
+.ctl{position:fixed;right:14px;bottom:14px;display:flex;gap:6px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 8px;font-size:13px;box-shadow:var(--shadow);font-variant-numeric:tabular-nums;z-index:5}
+.ctl button{border:0;background:var(--tint);color:var(--ink);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1}
+.ctl button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ctl .count{min-width:52px;text-align:center;color:var(--muted)}
+@media print{
+  .deck{height:auto;overflow:visible}
+  .slide{min-height:auto;break-after:page;page-break-after:always}
+  .ctl{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<section class="slide" id="s1">
+  <div class="inner">
+    <p class="eyebrow">Разбор 5 роликов · Ольга Делевски · 23 сентября 2026</p>
+    <h1 class="title">Пять роликов стилиста Ольги Делевски</h1>
+    <p class="lead">Ольга Делевски (Чистова) — стилист-имиджмейкер «больше 15 лет», своя школа стиля. Все пять роликов ведут на бесплатный 3-дневный марафон «Перезагрузка», дальше — платные уроки по 5000 ₽. Разобрали 5 клипов: расшифровки, тайминги, раскадровки.</p>
+    <div class="stats">
+      <div class="stat"><b>2,77 млн</b><span>просмотров у лучшего ролика</span></div>
+      <div class="stat"><b>2 из 5</b><span>хиты — больше 2 млн просмотров</span></div>
+      <div class="stat"><b>60⁠–⁠75 с</b><span>длина роликов-хитов</span></div>
+      <div class="stat"><b>~4 с</b><span>заголовок держится на экране</span></div>
+    </div>
+    <div class="caps">Три главных тренда на осень 2026. Что же купить?<small>Хук ролика-лидера — 2,77 млн просмотров</small></div>
+  </div>
+</section>
+
+<section class="slide" id="s2">
+  <div class="inner">
+    <p class="eyebrow">1 · Цифры</p>
+    <h2 class="title">Пять роликов: просмотры и длина</h2>
+    <table>
+      <thead><tr><th>№</th><th>Тема</th><th>Дата</th><th>Длина</th><th>Просмотры</th><th>Лайки</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><a href="https://vk.com/clip-173362469_456242177" target="_blank" rel="noopener">Три тренда осени 2026</a></td><td>15.09</td><td>60 с</td><td>2,77 млн</td><td>19,5 тыс.</td></tr>
+        <tr><td>2</td><td><a href="https://vk.com/clip-173362469_456242160" target="_blank" rel="noopener">Три цвета, которые старят после 40</a></td><td>12.09</td><td>75 с</td><td>2,01 млн</td><td>17,0 тыс.</td></tr>
+        <tr><td>3</td><td><a href="https://vk.com/clip-173362469_456242173" target="_blank" rel="noopener">«Мне ничего не подойдёт» → нужна система</a></td><td>14.09</td><td>52 с</td><td>235 тыс.</td><td>1,1 тыс.</td></tr>
+        <tr><td>4</td><td><a href="https://vk.com/clip-173362469_456242223" target="_blank" rel="noopener">Городской рюкзак: правила</a></td><td>19.09</td><td>63 с</td><td>195 тыс.</td><td>1,2 тыс.</td></tr>
+        <tr><td>5</td><td><a href="https://vk.com/clip-173362469_456242222" target="_blank" rel="noopener">Образ для воспитателя</a></td><td>19.09</td><td>118 с</td><td>85 тыс.</td><td>1,1 тыс.</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Два хита — списки «три штуки + сезон» на 60⁠–⁠75 секунд. Ролик про профессию (2 минуты) собрал меньше всех.</p>
+  </div>
+</section>
+
+<section class="slide" id="s3">
+  <div class="inner">
+    <p class="eyebrow">Ролик 1 · 2,77 млн просмотров</p>
+    <h2 class="title">Три тренда осени 2026</h2>
+    <div class="caps">Три главных тренда на осень 2026. Что же купить?<small>Первая фраза — 0⁠–⁠4,7 с</small></div>
+    <div class="flow">
+      <div><b>0⁠–⁠4,7 с</b>хук: цифра «3» + тренды года</div>
+      <div><b>3 блока по 12⁠–⁠14 с</b>тренд → вещь → метафора</div>
+      <div><b>45⁠–⁠52 с</b>вывод — тренды проживут ещё 5 лет</div>
+      <div><b>52⁠–⁠60 с</b>призыв на мастер-класс</div>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>Что говорит</h3>
+        <ul>
+          <li>Замша — «тактильная роскошь, видно с другой стороны улицы»</li>
+          <li>Шоколадная гамма — «новый чёрный, только интереснее»</li>
+          <li>Неконтрастная клетка — «геометрия, которая считывается лощёной»</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Что на экране</h3>
+        <ul>
+          <li>Заголовок: цифра «3» слева + «ГЛАВНЫХ ТРЕНДА НА ОСЕНЬ 2026», верхняя треть кадра</li>
+          <li>Вставки: фото вещей + полоса из 4 цветовых плашек у нижнего края</li>
+          <li>Концовка: без карточки, обрыв на «либо в шапке профиля»</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s4">
+  <div class="inner">
+    <p class="eyebrow">Ролик 2 · 2,01 млн просмотров</p>
+    <h2 class="title">Три цвета, которые старят после 40</h2>
+    <div class="caps">Эти три цвета запрещено носить осенью после сорока<small>Первая фраза — 0⁠–⁠4 с</small></div>
+    <div class="flow">
+      <div><b>0⁠–⁠4 с</b>хук: «3 цвета запрещено носить»</div>
+      <div><b>до ~45 с</b>3 «запрещённых» цвета по очереди</div>
+      <div><b>45⁠–⁠60 с</b>цвета на замену + правило</div>
+      <div><b>68⁠–⁠75 с</b>призыв на мастер-класс</div>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>Что говорит</h3>
+        <ul>
+          <li>Тотальный чёрный у лица — «работает как прожектор»</li>
+          <li>Мышиный серый — забирает «последние» краски лица</li>
+          <li>Блёклый беж — «майонезный визуал»</li>
+          <li>Правило: у лица держим цвет, который подсвечивает, а не гасит</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Что на экране</h3>
+        <ul>
+          <li>Заголовок: «ЭТИ 3 ЦВЕТА ЗАПРЕЩЕНО НОСИТЬ ОСЕНЬЮ ПОСЛЕ 40», середина кадра поверх торса</li>
+          <li>Вставки: цветовые круги копятся по одному, до 5, подпись капсом у каждого</li>
+          <li>Концовка: без карточки, обрыв на полуслове</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s5">
+  <div class="inner">
+    <p class="eyebrow">Ролик 3 · 235 тыс. просмотров</p>
+    <h2 class="title">«Мне ничего не подойдёт» → нужна система</h2>
+    <div class="caps">Ой, ну мне, наверное, ничего вообще не подойдёт из одежды<small>Первая фраза — 0⁠–⁠5 с</small></div>
+    <div class="flow">
+      <div><b>0⁠–⁠5 с</b>хук-возражение из комментариев</div>
+      <div><b>5⁠–⁠30 с</b>почему бесплатные советы не работают</div>
+      <div><b>30⁠–⁠52 с</b>призыв на мастер-класс — половина ролика</div>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>Что говорит</h3>
+        <ul>
+          <li>Советы без правил — «горсть пазла», которую не собрать</li>
+          <li>Нужны не вещи, а система</li>
+          <li>Система одевает «любой рост, любой размер, любую фигуру»</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Что на экране</h3>
+        <ul>
+          <li>Заголовок: «МНЕ НИЧЕГО НЕ ПОДОЙДЁТ» + скриншот комментария внизу</li>
+          <li>Склеек и вставок меньше всех — около 3 за 52 с</li>
+          <li>Концовка: без карточки — продающий, а не информационный ролик</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s6">
+  <div class="inner">
+    <p class="eyebrow">Ролик 4 · 195 тыс. просмотров</p>
+    <h2 class="title">Городской рюкзак: правила</h2>
+    <div class="caps">Модные городские рюкзаки на осень<small>Первая фраза — 0⁠–⁠5,4 с</small></div>
+    <div class="flow">
+      <div><b>0⁠–⁠5,4 с</b>хук: «городские рюкзаки на осень»</div>
+      <div><b>5 правил по 8⁠–⁠10 с</b>форма → размер → фурнитура → цвет → как носим</div>
+      <div><b>55⁠–⁠63 с</b>призыв на мастер-класс</div>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>Что говорит</h3>
+        <ul>
+          <li>Форма жёсткая — мягкий мешок «это мешок забот, а не аксессуар»</li>
+          <li>Масштаб средний — «не палатка с провизией»</li>
+          <li>Минимум фурнитуры — подвески и карманы городу не нужны</li>
+          <li>Носим на плече или в руке — «читается как сумка»</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Что на экране</h3>
+        <ul>
+          <li>Заголовок: «МОДНЫЕ ГОРОДСКИЕ РЮКЗАКИ НА ОСЕНЬ», по центру кадра</li>
+          <li>Вставок больше всех — 10⁠–⁠12 за 63 с, по одной цветовой плашке на кадр</li>
+          <li>Концовка: без карточки, обрыв на «либо в шапке профиля»</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s7">
+  <div class="inner">
+    <p class="eyebrow">Ролик 5 · 85 тыс. просмотров</p>
+    <h2 class="title">Образ для воспитателя</h2>
+    <div class="caps">Воспитатель весь день в движении, но это не повод являться на работу в затрапезном виде и в тапках по принципу «да всё равно испачкаюсь»<small>Первая фраза — 0⁠–⁠12 с, длинный хук</small></div>
+    <div class="flow">
+      <div><b>0⁠–⁠12 с</b>хук — длинный, без цифры</div>
+      <div><b>12⁠–⁠55 с</b>база → ткани</div>
+      <div><b>55⁠–⁠85 с</b>цвета верха и низа</div>
+      <div><b>95⁠–⁠105 с</b>обувь</div>
+      <div><b>108⁠–⁠118 с</b>призыв на мастер-класс</div>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>Что говорит</h3>
+        <ul>
+          <li>База — костюмный трикотаж: «вид делового костюма», но тянется</li>
+          <li>Ткани плотные, немнущиеся: джерси, футер</li>
+          <li>Цвета верха светлые: пыльная роза, кэмел</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Что на экране</h3>
+        <ul>
+          <li>Заголовок-вопрос без цифры + скриншот вопроса из комментариев</li>
+          <li>Ч/б врезки на реплике «всё равно испачкаюсь»</li>
+          <li>Самый длинный и самый слабый — 118 с, вдвое больше приёмов</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s8">
+  <div class="inner">
+    <p class="eyebrow">2 · Формула текста</p>
+    <h2 class="title">Что повторяется во всех пяти роликах</h2>
+    <div class="cards">
+      <div class="card"><h3>Хук</h3><p>Число + предмет + сезон, чужое возражение в кавычках или профессия — первая фраза 3⁠–⁠5 секунд.</p></div>
+      <div class="card"><h3>Контраст</h3><p>Вторая фраза — отсечка от привычного: «и нет, я не про…», «это не повод…».</p></div>
+      <div class="card"><h3>Тело из трёх пунктов</h3><p>Название → где/что → одна яркая метафора, фразы короткие и назывные.</p></div>
+      <div class="card"><h3>Список из 6 цветов</h3><p>Цвета словами, не «тёплые тона»: «горький шоколад, винный, графит…».</p></div>
+      <div class="card"><h3>Правило и срок</h3><p>Одна фраза-правило и обещание, что совет не устареет («минимум 5 лет»).</p></div>
+      <div class="card"><h3>Призыв</h3><p>Мостик («что не рассказала») + приглашение на мастер-класс — дословно одинаковый во всех пяти.</p></div>
+      <div class="card"><h3>Длина</h3><p>60⁠–⁠75 секунд, 120⁠–⁠150 слов, темп 2 слова в секунду; двухминутный ролик — худший по просмотрам.</p></div>
+    </div>
+    <p class="note">Пункты 1⁠–⁠5 берём как есть, пункт 6 (призыв) заменяем на концовку без курса — раздел 5.</p>
+  </div>
+</section>
+
+<section class="slide" id="s9">
+  <div class="inner">
+    <p class="eyebrow">3 · На экране</p>
+    <h2 class="title">Как сделано визуально</h2>
+    <div class="cols">
+      <div>
+        <h3>Что видно в кадре</h3>
+        <ul class="check">
+          <li>Заголовок — капс, белый, тень; с первого кадра целиком, держится 4⁠–⁠4,6 с, уходит белой вспышкой</li>
+          <li>Субтитры — 48⁠–⁠50 px, строка на 61⁠–⁠63 % высоты, слово-акцент крупнее ×1,4</li>
+          <li>Карточки-разделы — тот же кадр, сильное размытие, без затемнения</li>
+          <li>Вставки — каждые 5⁠–⁠10 секунд, на весь экран, всегда с подписью</li>
+          <li>Иконка-блокнот — контурная, статична 1,5⁠–⁠2,5 с, в нижнем углу</li>
+          <li>Обложка — кадр с заголовком из первых 2 с, не автовыбор VK; концовка без карточки</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Шпаргалка — 12 кадров</h3>
+        <img src="storyboards/design-pack.jpg" alt="12 кадров оформления" style="width:100%;max-width:520px;border-radius:10px;border:1px solid var(--line)">
+        <p class="note">Замеры — storyboards/design-spec.md, полный размер — storyboards/design-pack.png.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s10">
+  <div class="inner">
+    <p class="eyebrow">4 · Хиты и слабый ролик</p>
+    <h2 class="title">Чем хиты отличаются от ролика 5</h2>
+    <div class="cols">
+      <div>
+        <h3>Хиты — ролики 1 и 2</h3>
+        <ul class="check">
+          <li>Цифра в заголовке</li>
+          <li>60⁠–⁠75 секунд</li>
+          <li>Одна крупность на весь ролик</li>
+          <li>Один небольшой набор приёмов</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Слабый — ролик 5</h3>
+        <ul class="warnlist">
+          <li>Вопрос без цифры</li>
+          <li>118 секунд — вдвое дольше</li>
+          <li>Проходка в кадр со «шторкой» + скриншот комментария</li>
+          <li>Шесть карточек-разделов и приёмов</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">Раскадровка и тайминги — storyboards/visual-notes.md.</p>
+  </div>
+</section>
+
+<section class="slide" id="s11">
+  <div class="inner">
+    <p class="eyebrow">5 · Что берём себе</p>
+    <h2 class="title">Формула та же, курса нет</h2>
+    <div class="cols">
+      <div>
+        <h3>Оставляем как есть</h3>
+        <ul class="check">
+          <li>Хук, контраст, три пункта с метафорой, список цветов, правило (пункты 1⁠–⁠5)</li>
+          <li>Монтаж: штатив, один образ, жёсткие склейки</li>
+          <li>Субтитры пофразно со словом-акцентом</li>
+          <li>Обложка = кадр с заголовком, не автовыбор VK</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Меняем</h3>
+        <ul>
+          <li>Концовка без курса: «сохраните», «напишите», «следующий ролик» — вместо ссылки на мастер-класс</li>
+          <li>Позиционирование под жену: размер 42⁠–⁠44, всё до 3000 ₽</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">Пять сценариев с этой заменой — 02-Сценарии-для-жены.md, разделы 6⁠–⁠8.</p>
+  </div>
+</section>
+
+<section class="slide" id="s12">
+  <div class="inner">
+    <p class="eyebrow">Ссылки и файлы</p>
+    <h2 class="title">Все пять роликов и материалы разбора</h2>
+    <ul>
+      <li><a href="https://vk.com/clip-173362469_456242177" target="_blank" rel="noopener">Ролик 1 · Три тренда осени 2026</a></li>
+      <li><a href="https://vk.com/clip-173362469_456242160" target="_blank" rel="noopener">Ролик 2 · Три цвета, которые старят после 40</a></li>
+      <li><a href="https://vk.com/clip-173362469_456242173" target="_blank" rel="noopener">Ролик 3 · «Мне ничего не подойдёт»</a></li>
+      <li><a href="https://vk.com/clip-173362469_456242223" target="_blank" rel="noopener">Ролик 4 · Городской рюкзак</a></li>
+      <li><a href="https://vk.com/clip-173362469_456242222" target="_blank" rel="noopener">Ролик 5 · Образ для воспитателя</a></li>
+    </ul>
+    <p class="note">Файлы: 01-Разбор-5-роликов-delevsky.md, 02-Сценарии-для-жены.md, storyboards/.</p>
+  </div>
+</section>
+
+</div>
+
+<nav class="ctl" aria-label="Навигация по слайдам">
+  <button class="prev" type="button" aria-label="Предыдущий слайд">↑</button>
+  <span class="count">1 / 12</span>
+  <button class="next" type="button" aria-label="Следующий слайд">↓</button>
+</nav>
+
+<script>
+(function(){
+  var deck=document.querySelector(".deck"), slides=Array.prototype.slice.call(document.querySelectorAll(".slide")), count=document.querySelector(".count"), cur=0;
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function update(fromScroll){var vh=deck.clientHeight||window.innerHeight||600; var st=deck.scrollTop+vh*0.35; var i=0; for(var k=0;k<slides.length;k++){if(slides[k].offsetTop<=st){i=k;}} if(i!==cur||!count.getAttribute("data-set")){cur=i; count.textContent=(cur+1)+" / "+slides.length; count.setAttribute("data-set","1"); if(fromScroll){try{history.replaceState(null,"","#"+slides[cur].id);}catch(err){}}}}
+  var ticking=false; deck.addEventListener("scroll",function(){if(!ticking){ticking=true; requestAnimationFrame(function(){ticking=false; update(true);});}}); update(); window.addEventListener("resize",function(){jump(); update();}); window.addEventListener("load",function(){jump(); update();}); window.addEventListener("hashchange",function(){jump(); update();});
+  function go(i){i=Math.max(0,Math.min(slides.length-1,i)); slides[i].scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});}
+  document.querySelector(".prev").addEventListener("click",function(){go(cur-1);});
+  document.querySelector(".next").addEventListener("click",function(){go(cur+1);});
+  addEventListener("keydown",function(e){
+    if(e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if(["ArrowDown","ArrowRight","PageDown"," "].indexOf(e.key)>=0){e.preventDefault();go(cur+1);}
+    else if(["ArrowUp","ArrowLeft","PageUp"].indexOf(e.key)>=0){e.preventDefault();go(cur-1);}
+    else if(e.key==="Home"){go(0);} else if(e.key==="End"){go(slides.length-1);}
+  });
+  function jump(){if(!location.hash)return; var t=document.querySelector(location.hash); if(!t)return; var prev=deck.style.scrollBehavior; deck.style.scrollBehavior="auto"; deck.scrollTop=t.offsetTop; deck.style.scrollBehavior=prev;}
+  jump(); update(); setTimeout(function(){jump(); update();},150); if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){setTimeout(function(){jump(); update();},50);});}
+})();
+</script>
+
+</body>
+</html>
