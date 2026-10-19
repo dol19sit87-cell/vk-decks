@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Карусели Ирины</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Manrope:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: single reading column like a stylist's lookbook; rubric colours act as fabric swatches that tag every topic */
+:root{
+  --bg:#f6f5f3; --surface:#ffffff; --fg:#26221f; --muted:#6f6762; --line:#e2ddd8;
+  --accent:#6e2a3d;           /* burgundy */
+  --r1:#7a6a58; --r2:#55663f; --r3:#6e2a3d; --r4:#3f566b; --chip-fg:#ffffff;
+  --soft:#efe9e6;
+  --f-display:"Tenor Sans","Times New Roman",serif;
+  --f-body:"Manrope",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1b1918; --surface:#24211f; --fg:#ece6e1; --muted:#a59c95; --line:#3a3532;
+  --accent:#d98aa0; --r1:#b39c82; --r2:#9db27f; --r3:#d98aa0; --r4:#8fb0cc; --chip-fg:#1b1918; --soft:#2c2826; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1b1918; --surface:#24211f; --fg:#ece6e1; --muted:#a59c95; --line:#3a3532;
+  --accent:#d98aa0; --r1:#b39c82; --r2:#9db27f; --r3:#d98aa0; --r4:#8fb0cc; --chip-fg:#1b1918; --soft:#2c2826; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px;display:grid;gap:44px}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0;letter-spacing:.01em}
+h1{font-size:clamp(30px,6vw,46px);line-height:1.1}
+h2{font-size:clamp(22px,4vw,28px)}
+h3{font-size:18px}
+p{margin:0;max-width:68ch}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+section{display:grid;gap:16px}
+header{display:grid;gap:14px}
+.lead{font-size:18px;max-width:62ch}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;padding:9px 14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none;font-size:14px}
+.btn:hover{border-color:var(--accent)}
+.chip{display:inline-block;padding:2px 8px;font-size:12px;font-weight:500;color:var(--chip-fg);white-space:nowrap}
+.c1{background:var(--r1)}.c2{background:var(--r2)}.c3{background:var(--r3)}.c4{background:var(--r4)}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+/* competitors */
+.acc{display:grid;gap:12px}
+.acc article{background:var(--surface);border:1px solid var(--line);padding:16px 18px;display:grid;gap:8px;min-width:0}
+.acc .top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline}
+.acc .stat{color:var(--muted);font-size:14px}
+.verdict{font-size:14px;border-top:1px solid var(--line);padding-top:8px}
+.verdict b{color:var(--accent);font-weight:500}
+/* cycle */
+.cycle{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.day{background:var(--surface);border:1px solid var(--line);padding:16px;display:grid;gap:8px;align-content:start;min-width:0}
+.day .d{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.day dl{margin:0;display:grid;gap:6px;font-size:14px}
+.day dt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.day dd{margin:0}
+.notes{display:grid;gap:10px;padding-left:18px;margin:0}
+.notes li{max-width:70ch}
+/* template */
+.slides{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;list-style:none;padding:0;margin:0}
+.slides li{aspect-ratio:4/5;max-width:100%;background:var(--soft);padding:12px;display:flex;flex-direction:column;gap:6px;font-size:13px}
+.slides .n{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.slides b{font-family:var(--f-display);font-weight:400;font-size:16px}
+/* calendar */
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:inherit;font-size:14px;padding:6px 12px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.filters button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:640px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+tr:last-child td{border-bottom:0}
+td.cover{font-family:var(--f-display);font-size:15px}
+.ready{color:var(--r2);font-weight:500}
+.small{font-size:13px;color:var(--muted);max-width:75ch}
+.need{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.need div{border-left:3px solid var(--accent);padding:4px 0 4px 14px;display:grid;gap:4px;min-width:0}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head><body>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Instagram · карусели · план от 19.10.2026</div>
+  <h1>Карусели Ирины: цикл, рубрики и темы на месяц</h1>
+  <p class="lead">Выкладываем 3 карусели в неделю (пн, ср, пт), раз в две недели добавляем кейс клиентки. Рубрик три, у каждой своя задача: шпаргалка приводит новых людей, тренд месяца «с подиума в магазин» даёт повод подписаться и ведёт к гайду, экспертная карусель с лицом Ирины ведёт к гайду и платному разбору 1:1. Рилс идут отдельно, каждый день.</p>
+  <div class="links">
+    <a class="btn" href="https://drive.google.com/file/d/1S2tHTj6iniOaAl88LfCu7qzhDJcfEwnd/view" target="_blank" rel="noopener">План в PDF</a>
+    <a class="btn" href="https://drive.google.com/drive/folders/1lw8WpoHBqSgWDSYsiKcmJn6LfHce4AiM" target="_blank" rel="noopener">Папка «Карусели» на Диске</a>
+    <a class="btn" href="https://maysoulme.ru/guides/post-karusel/" target="_blank" rel="noopener">Гайд maysoulme</a>
+  </div>
+</header>
+
+<section id="razbor">
+  <div class="eyebrow">Что разобрали · цифры из Instagram на 19.10</div>
+  <h2>Конкуренты и образец</h2>
+  <div class="acc">
+    <article>
+      <div class="top"><h3>maysoulme</h3><span class="stat num">172 тыс. подписчиков · 139 каруселей из 168 постов</span></div>
+      <p>Тема: ИИ и блогинг. С августа выкладывает 1,5–2 карусели в день, в октябре 35 штук за 19 дней. В 102 постах из 106 в конце стоит слово в комментариях: СХЕМА, СЦЕНАРИИ, МОНТАЖ, ОБРАБОТКА.</p>
+      <p>Лучший пост «Хватит монтировать в CapCut» собрал <span class="num">13 280</span> лайков и <span class="num">4 284</span> комментария (<a href="https://www.instagram.com/p/Db8pjx4keLo/" target="_blank" rel="noopener">пост</a>). Она повторила его ещё 3 раза: <a href="https://www.instagram.com/p/DdZeBeHEbc_/" target="_blank" rel="noopener">1</a>, <a href="https://www.instagram.com/p/Dcqzh6ICOvz/" target="_blank" rel="noopener">2</a>, <a href="https://www.instagram.com/p/DdSBdAhEUdO/" target="_blank" rel="noopener">3</a>. Медиана лайков по всем каруселям <span class="num">289</span>, а с 5 октября только <span class="num">77</span>.</p>
+      <p class="verdict"><b>Берём</b> структуру: хук на обложке, одна мысль на слайд, доказательство, одно действие в конце. Повторяем карусель, если она залетела. <b>Не берём</b> 2 поста в день с одним и тем же словом: отклик падает.</p>
+    </article>
+    <article>
+      <div class="top"><h3>effection_lady</h3><span class="stat num">587 тыс. · 6 каруселей и 0 рилс за 14 дней</span></div>
+      <p>Имиджмейкер. Фото образов, своего лица почти нет. Обложки сделаны по одной формуле: цифра, «самых дорогих», предмет. «Как носить юбку стильно зимой» собрала <span class="num">7 381</span> лайк и <span class="num">590</span> комментариев (<a href="https://www.instagram.com/p/DePgRZACrQm/" target="_blank" rel="noopener">пост</a>). «Пуховик в красивом оттенке», в конце «пиши ПУХОВИК, вышлю артикулы»: <span class="num">598</span> комментариев (<a href="https://www.instagram.com/p/DemyfC4iDcf/" target="_blank" rel="noopener">пост</a>).</p>
+      <p class="verdict"><b>Берём</b> формулы обложек («7 самых дорогих…», «как носить X стильно зимой», «9 вещей вне моды») и слово за артикулы.</p>
+    </article>
+    <article>
+      <div class="top"><h3>style_support_</h3><span class="stat num">301 тыс. · рилс каждый день, 4 карусели за 14 дней</span></div>
+      <p>Персональный стилист. Шпаргалка «обувь к юбке до колена ✓/✗» собрала <span class="num">3 803</span> лайка и <span class="num">97</span> репостов (<a href="https://www.instagram.com/p/DeOoZIsDpt3/" target="_blank" rel="noopener">пост</a>). «Леггинсы вернулись? Как носить в 2026»: <span class="num">2 133</span> лайка (<a href="https://www.instagram.com/p/DeXEe5HjuJJ/" target="_blank" rel="noopener">пост</a>).</p>
+      <p class="verdict"><b>Берём</b> шпаргалку ✓/✗ на одном слайде и обложку-вопрос про тренд.</p>
+    </article>
+    <article>
+      <div class="top"><h3>anna_muza</h3><span class="stat num">18,6 тыс. · 3 рилс за 14 дней</span></div>
+      <p class="verdict">Каруселей не делает, для этого формата она не образец.</p>
+    </article>
+  </div>
+</section>
+
+<section id="cikl">
+  <div class="eyebrow">Неделя повторяется по кругу</div>
+  <h2>Цикл и частота</h2>
+  <div class="cycle">
+    <div class="day"><span class="d">ПН</span><span><span class="chip c1">Шпаргалка ✓/✗</span></span>
+      <dl><dt>Что это</dt><dd>1–2 слайда-коллажа «так / не так» и 4–5 слайдов с объяснением</dd>
+      <dt>Зачем</dt><dd>Охват: её сохраняют и пересылают подругам, Instagram показывает её новым людям</dd>
+      <dt>В конце</dt><dd>«Сохрани, чтобы не искать»</dd>
+      <dt>Ирина в кадре</dt><dd>Не нужна, только вещи</dd></dl></div>
+    <div class="day"><span class="d">СР</span><span><span class="chip c2">С подиума в магазин</span></span>
+      <dl><dt>Что это</dt><dd>Тренд месяца с показов и 4–6 таких же вещей из Lime, Selfmade, Love Republic с ценами</dd>
+      <dt>Зачем</dt><dd>Каждый месяц новая тема и повод подписаться. Ведёт к гайду месяца</dd>
+      <dt>В конце</dt><dd>Слово ГАЙД: в нём все тренды месяца со ссылками</dd>
+      <dt>Ирина в кадре</dt><dd>Не нужна: фото с показов и сайтов магазинов</dd></dl></div>
+    <div class="day"><span class="d">ПТ</span><span><span class="chip c3">Экспертная</span></span>
+      <dl><dt>Что это</dt><dd>Схема «думаешь, дело в X, а на самом деле в Y»</dd>
+      <dt>Зачем</dt><dd>Доверие и подписка, ведёт к гайду, а гайд к разбору 1:1</dd>
+      <dt>В конце</dt><dd>Слово за гайд: ЦВЕТ или КАПСУЛА</dd>
+      <dt>Ирина в кадре</dt><dd>Да, лицо на обложке</dd></dl></div>
+    <div class="day"><span class="d">СБ · раз в 2 недели</span><span><span class="chip c4">Кейс клиентки</span></span>
+      <dl><dt>Что это</dt><dd>Было / стало, что поменяли и почему</dd>
+      <dt>Зачем</dt><dd>Продаёт платный разбор 1:1</dd>
+      <dt>В конце</dt><dd>Слово РАЗБОР</dd>
+      <dt>Ирина в кадре</dt><dd>Фото клиентки с её согласия</dd></dl></div>
+  </div>
+  <ul class="notes">
+    <li><b>Почему 3 в неделю, а не 2 в день.</b> Стилисты с сотнями тысяч подписчиков выкладывают 2–3 карусели в неделю, и на пост у них приходится 2–7 тыс. лайков. У maysoulme при 2 постах в день медиана лайков упала с 289 до 77. Если две недели всё хорошо, поднимаем до 4–5.</li>
+    <li><b>Время 19:00 по Москве.</b> Это предположение, статистики аккаунта Ирины пока нет. Через 2 недели смотрим статистику Instagram и переносим.</li>
+    <li><b>Слово в комментариях не чаще 2 раз в неделю.</b> Instagram в 2024 году предупредил, что не рекомендует посты, которые просят написать слово ради охвата, а потом уточнил, что автоответы со словом за полезный материал под это не попадают (<a href="https://www.socialmediatoday.com/news/instagram-says-using-certain-ctas-can-impact-post-reach/717732/" target="_blank" rel="noopener">предупреждение</a>, <a href="https://www.socialmediatoday.com/news/instagram-clarifies-advice-on-single-word-ctas-and-longer-reels/718151/" target="_blank" rel="noopener">уточнение</a>). Поэтому слово ставим только там, где человек правда получает гайд или артикулы.</li>
+    <li><b>Публикация.</b> Через бизнес-портфолио Instagram ставим посты в отложку на неделю вперёд. Слова подключаем к автоответу, который настраивается для «гайд».</li>
+  </ul>
+</section>
+
+<section id="shablon">
+  <div class="eyebrow">7–9 слайдов · 1080×1350</div>
+  <h2>Шаблон одной карусели</h2>
+  <ol class="slides">
+    <li><span class="n">слайд 1</span><b>Обложка</b>До 8 слов, цифра или вопрос, без точек. «7 самых дорогих…», «X вернулись?», «это выдаёт дешёвый образ»</li>
+    <li><span class="n">слайд 2</span><b>Ставка</b>Почему это важно читательнице и опыт Ирины одной строкой</li>
+    <li><span class="n">слайды 3–6</span><b>Одна мысль на слайд</b>Фото вещи или образа, последняя строка цепляет следующий слайд</li>
+    <li><span class="n">слайд 7</span><b>Доказательство</b>До/после, замеры в см, цена, своя примерка</li>
+    <li><span class="n">слайд 8</span><b>Вывод</b>Отвечает на вопрос с обложки</li>
+    <li><span class="n">слайд 9</span><b>Одно действие</b>Сохранить или слово, не два сразу</li>
+  </ol>
+  <p class="small">Подпись под постом: 2–3 строки, усиливает карусель и не пересказывает её, в конце тот же призыв и 3–5 хэштегов. Оформление как у пилотной карусели из сентября: два фона, нейтральный и бежевый, текст в центральной зоне.</p>
+</section>
+
+<section id="temy">
+  <div class="eyebrow">21.10 — 21.11.2026 · 16 каруселей</div>
+  <h2>Темы на 4 недели</h2>
+  <div class="filters" role="group" aria-label="Фильтр по рубрике">
+    <button id="f-all" data-f="all" aria-pressed="true">Все</button>
+    <button id="f-1" data-f="1" aria-pressed="false">Шпаргалки</button>
+    <button id="f-2" data-f="2" aria-pressed="false">Тренды</button>
+    <button id="f-3" data-f="3" aria-pressed="false">Экспертные</button>
+    <button id="f-4" data-f="4" aria-pressed="false">Кейсы</button>
+    <button id="f-nophoto" data-f="nophoto" aria-pressed="false">Можно без фото Ирины</button>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Дата</th><th>Рубрика</th><th>Обложка</th><th>Призыв</th><th>Фото Ирины</th><th>Подтверждение</th></tr></thead>
+    <tbody id="cal"></tbody>
+  </table></div>
+  <p class="small">Все фото настоящие: показы (Vogue Runway) и сайты магазинов из гайда, ничего не генерируем. Ценового лимита нет: ориентируемся на платёжеспособную аудиторию и средний сегмент. В запасе темы из плана от сентября: 3 мифа о размере 42–44, как читать замеры за 30 секунд, 5 вещей, которые я вернула на маркетплейс, «угадай цену образа», «А или Б».</p>
+</section>
+
+<section id="nuzhno">
+  <div class="eyebrow">Чтобы начать</div>
+  <h2>Что нужно</h2>
+  <div class="need">
+    <div><b>Фото Ирины</b><span>6–8 кадров по пояс и в полный рост, лицо в камеру, светлый фон, 2–3 разных образа. Пойдут на обложки экспертных каруселей на месяц.</span></div>
+    <div><b>Слова в автоответ</b><span>Тренды ведут на уже настроенный «гайд». Новое слово только одно: РАЗБОР, для кейсов клиенток.</span></div>
+    <div><b>Согласие клиентки</b><span>Кейс публикуем только с её письменного согласия, например Елены Погосян.</span></div>
+    <div><b>Проверка через 2 недели</b><span>Смотрим сохранения, репосты и комментарии по каждой карусели. Залетевшую повторяем с новой обложкой.</span></div>
+  </div>
+</section>
+
+<footer>Источники: профили и посты Instagram на 19.10.2026, гайд maysoulme.ru, план каруселей от сентября. Цифры лайков продолжают расти.</footer>
+</div>
+
+<script>
+const R={1:["c1","Шпаргалка"],2:["c2","Тренд"],3:["c3","Экспертная"],4:["c4","Кейс"]};
+const T=[
+ ["Ср 21.10", 3, "3 вещи этой осени, которые выглядят дороже своей цены", "ЦВЕТ", "готова (пилот)", 0, "тема «дорого»: <a href=\"https://www.instagram.com/p/DdenQG5ioCu/\">effection_lady, 19.09, 7 842 лайков</a>"],
+ ["Пт 23.10", 1, "Какая обувь к юбке / платью: ✓ и ✗", "сохрани", "не нужно", 1, "<a href=\"https://www.instagram.com/p/DeOoZIsDpt3/\">style_support_, 08.10, 3 806 лайков</a>"],
+ ["Пн 26.10", 1, "Какая обувь к джинсам wide leg: ✓ и ✗", "сохрани", "не нужно", 1, "<a href=\"https://www.instagram.com/p/Ddo4sLxjgdH/\">style_support_, 23.09, 5 663 лайков</a>"],
+ ["Ср 28.10", 2, "Кроко-кожа: с подиума в Lime и Selfmade", "ГАЙД", "не нужно", 1, "тренды заходят слабее: <a href=\"https://www.instagram.com/p/Dd9ejXSiuzU/\">effection_lady, 01.10, 3 875 лайков</a>; тема из твоего гайда"],
+ ["Пт 30.10", 3, "Как выглядеть дорого осенью: 6 формул", "ЦВЕТ", "да", 0, "<a href=\"https://www.instagram.com/p/DdenQG5ioCu/\">effection_lady, 19.09, 7 842 лайков</a>"],
+ ["Пн 2.11", 1, "Какая обувь к брюкам палаццо: ✓ и ✗", "сохрани", "не нужно", 1, "<a href=\"https://www.instagram.com/p/Dd6xlXTDsVF/\">style_support_, 30.09, 1 960 лайков</a>"],
+ ["Ср 4.11", 2, "Клетка этой осени: как на показах и где купить", "ГАЙД", "не нужно", 1, "тема из твоего гайда, тренды заходят слабее"],
+ ["Пт 6.11", 3, "Цвет + цвет: 5 дорогих сочетаний этой осени", "ЦВЕТ", "да", 0, "<a href=\"https://www.instagram.com/p/Ddy_IpiirbY/\">effection_lady, 27.09, 18 134 лайков</a>, <a href=\"https://www.instagram.com/p/DeAIzI5igT_/\">effection_lady, 02.10, 4 740 лайков</a>"],
+ ["Сб 7.11", 4, "Было / стало: разбор гардероба клиентки", "РАЗБОР", "фото клиентки", 1, "у конкурентов нет, это продажа разбора Ирины"],
+ ["Пн 9.11", 1, "Как носить юбку стильно зимой", "сохрани", "не нужно", 1, "<a href=\"https://www.instagram.com/p/DePgRZACrQm/\">effection_lady, 08.10, 7 403 лайков</a>"],
+ ["Ср 11.11", 2, "Меховые акценты: 5 вещей, с которыми пальто выглядит дороже", "ГАЙД", "не нужно", 1, "тема из твоего гайда, тренды заходят слабее"],
+ ["Пт 13.11", 3, "Базовый гардероб: 7 сочетаний цветов, которые выглядят дорого", "ЦВЕТ", "да", 0, "<a href=\"https://www.instagram.com/p/Dd6zm3xCgtY/\">effection_lady, 30.09, 4 614 лайков</a>"],
+ ["Пн 16.11", 1, "Какой пуховик выглядит дорого: оттенки и с чем носить", "сохрани", "не нужно", 1, "<a href=\"https://www.instagram.com/p/DemyfC4iDcf/\">effection_lady, 17.10, 1 596 лайков</a> и 608 комментариев"],
+ ["Ср 18.11", 2, "Высокий ворот: с подиума в магазин", "ГАЙД", "не нужно", 1, "тема из твоего гайда, тренды заходят слабее"],
+ ["Пт 20.11", 3, "Леггинсы вернулись? Как носить в 2026", "КАПСУЛА", "да", 0, "<a href=\"https://www.instagram.com/p/DeXEe5HjuJJ/\">style_support_, 11.10, 2 137 лайков</a>"],
+ ["Сб 21.11", 4, "Что я убрала из шкафа клиентки и почему", "РАЗБОР", "фото клиентки", 1, "у конкурентов нет, это продажа разбора Ирины"]
+];
+const tb=document.getElementById("cal");
+tb.innerHTML=T.map(t=>`<tr data-r="${t[1]}" data-np="${t[5]}"><td class="num">${t[0]}</td><td><span class="chip ${R[t[1]][0]}">${R[t[1]][1]}</span></td><td class="cover">${t[2]}</td><td>${t[3]}</td><td${t[4].startsWith("готова")?' class="ready"':''}>${t[4]}</td><td class="src">${t[6]}</td></tr>`).join("");
+document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));
+  const f=b.dataset.f;
+  tb.querySelectorAll("tr").forEach(r=>{r.hidden=!(f==="all"||(f==="nophoto"?r.dataset.np==="1":r.dataset.r===f));});
+}));
+</script>
+
+</body></html>
