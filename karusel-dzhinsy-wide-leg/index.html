@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Обувь к джинсам wide leg</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Manrope:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: an Instagram post preview on the left, the stylist's notes (text, sources, shop links) beside it; stacks on phones */
+:root{
+  --bg:#f6f5f3; --surface:#ffffff; --fg:#26221f; --muted:#6f6762; --line:#e2ddd8;
+  --accent:#6e2a3d; --ok:#4f6b3a; --no:#8e2b2b; --soft:#efe9e6;
+  --f-display:"Tenor Sans","Times New Roman",serif;
+  --f-body:"Manrope",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1b1918; --surface:#24211f; --fg:#ece6e1; --muted:#a59c95; --line:#3a3532; --accent:#d98aa0; --ok:#9db27f; --no:#e08a8a; --soft:#2c2826; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1b1918; --surface:#24211f; --fg:#ece6e1; --muted:#a59c95; --line:#3a3532; --accent:#d98aa0; --ok:#9db27f; --no:#e08a8a; --soft:#2c2826; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px;display:grid;gap:36px}
+h1,h2{font-family:var(--f-display);font-weight:400;margin:0;text-wrap:balance}
+h1{font-size:clamp(28px,5.5vw,42px);line-height:1.12}
+h2{font-size:clamp(20px,3.6vw,26px)}
+p{margin:0}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+header{display:grid;gap:10px}
+.status{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-size:13px;padding:3px 10px;border:1px solid var(--line);background:var(--surface)}
+.pill.wait{border-color:var(--accent);color:var(--accent)}
+.top{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:820px){.top{grid-template-columns:minmax(0,1fr)}}
+/* post preview */
+.post{background:var(--surface);border:1px solid var(--line);max-width:420px;width:100%}
+.post-head{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:14px;font-weight:700}
+.ava{width:32px;height:32px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-size:15px;color:var(--accent);border:1px solid var(--line)}
+.car{position:relative}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.track img{flex:0 0 100%;width:100%;aspect-ratio:4/5;object-fit:cover;scroll-snap-align:start;display:block;max-width:100%}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#26221f;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.nav.prev{left:8px}.nav.next{right:8px}
+.nav[disabled]{opacity:0;pointer-events:none}
+.count{position:absolute;right:10px;top:10px;background:rgba(20,16,12,.6);color:#fff;font-family:var(--f-mono);font-size:12px;padding:2px 8px;border-radius:10px}
+.dots{display:flex;justify-content:center;gap:5px;padding:10px 0 4px}
+.dots span{width:6px;height:6px;border-radius:50%;background:var(--line)}
+.dots span.on{background:var(--accent)}
+.caption{padding:6px 12px 14px;font-size:14px;display:grid;gap:6px}
+.caption b{font-weight:700}
+.tags{color:var(--accent)}
+/* notes */
+.notes{display:grid;gap:22px;min-width:0}
+.slides{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.slides li{display:grid;grid-template-columns:44px 64px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+.slides .n{font-family:var(--f-mono);font-size:13px;color:var(--muted);padding-top:2px}
+.slides img{width:64px;aspect-ratio:4/5;object-fit:cover;display:block;cursor:pointer;max-width:100%}
+.slides .t{display:grid;gap:4px;font-size:15px;min-width:0}
+.slides .src{font-size:13px;color:var(--muted)}
+.mark{font-weight:700}
+.mark.ok{color:var(--ok)}.mark.no{color:var(--no)}
+.shops{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.shop{background:var(--surface);border:1px solid var(--line);padding:12px 14px;display:grid;gap:2px;font-size:14px;text-decoration:none;color:var(--fg)}
+.shop:hover{border-color:var(--accent)}
+.shop .price{font-family:var(--f-mono);font-variant-numeric:tabular-nums;color:var(--muted)}
+.small{font-size:13px;color:var(--muted);max-width:75ch}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;padding:9px 14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none;font-size:14px}
+.btn:hover{border-color:var(--accent)}
+</style>
+</head><body>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Карусель 2 · шпаргалка · публикация 26.10.2026</div>
+  <h1>Какая обувь к джинсам wide leg</h1>
+  <div class="status"><span class="pill wait">Ждёт проверки Ирины</span><span class="pill">9 слайдов · 1080×1350</span><span class="pill">Фото: LIME</span></div>
+</header>
+
+<div class="top">
+  <article class="post" aria-label="Превью поста в Instagram">
+    <div class="post-head"><span class="ava">И</span>irina_sitko23</div>
+    <div class="car">
+      <div class="track" id="track">
+        <img src="s/01.jpg" alt="Обложка: какая обувь к джинсам wide leg">
+        <img src="s/02.jpg" alt="Шпаргалка из 6 пар">
+        <img src="s/03.jpg" alt="Лоферы">
+        <img src="s/04.jpg" alt="Балетки и мэри джейн">
+        <img src="s/05.jpg" alt="Кеды">
+        <img src="s/06.jpg" alt="Челси">
+        <img src="s/07.jpg" alt="Казаки">
+        <img src="s/08.jpg" alt="Лодочки">
+        <img src="s/09.jpg" alt="Чего избегать и призыв сохранить">
+      </div>
+      <button class="nav prev" id="prev" aria-label="Предыдущий слайд">‹</button>
+      <button class="nav next" id="next" aria-label="Следующий слайд">›</button>
+      <span class="count" id="count">1/9</span>
+    </div>
+    <div class="dots" id="dots"></div>
+    <div class="caption">
+      <p><b>irina_sitko23</b> Широкие джинсы есть почти у всех, а с обувью к ним путаются чаще всего. Собрала 6 пар, которые точно работают, все образы из карточек LIME.</p>
+      <p>Главное правило: штанина касается обуви, но не волочится по полу.</p>
+      <p>Сохрани, пригодится перед выходом</p>
+      <p class="tags">#широкиеджинсы #обувькджинсам #стильосенью #образнакаждыйдень #стилист</p>
+    </div>
+  </article>
+
+  <div class="notes">
+    <h2>Слайды и откуда правила</h2>
+    <ol class="slides" id="list">
+      <li><span class="n">01</span><img src="s/01.jpg" alt="" data-i="0"><div class="t"><span>Обложка: «Какая обувь к джинсам wide leg». 6 пар, которые работают, листай</span><span class="src">Тема: <a href="https://www.instagram.com/p/Ddo4sLxjgdH/" target="_blank" rel="noopener">style_support_, 23.09.2026, 5 663 лайка</a></span></div></li>
+      <li><span class="n">02</span><img src="s/02.jpg" alt="" data-i="1"><div class="t"><span>Шпаргалка: 6 пар ✓ на одном слайде и строка «не носим»</span><span class="src">Этот слайд сохраняют и пересылают</span></div></li>
+      <li><span class="n">03</span><img src="s/03.jpg" alt="" data-i="2"><div class="t"><span><span class="mark ok">✓</span> Лоферы на тонкой подошве: собранно, но не нарядно</span><span class="src"><a href="https://www.thesymbol.ru/fashion/trendy/c-kakoi-obuvyu-nosit-modnye-shirokie-djinsy/" target="_blank" rel="noopener">The Symbol</a>, <a href="https://www.whowhatwear.com/what-shoes-to-wear-with-wide-leg-jeans" target="_blank" rel="noopener">Who What Wear</a></span></div></li>
+      <li><span class="n">04</span><img src="s/04.jpg" alt="" data-i="3"><div class="t"><span><span class="mark ok">✓</span> Балетки и мэри джейн уравновешивают объём, джинсы с высокой посадкой</span><span class="src"><a href="https://www.thesymbol.ru/fashion/vybor/kakuyu-obuv-nosit-s-shirokimi-djinsami-v-2024-godu/" target="_blank" rel="noopener">The Symbol</a>, <a href="https://www.whowhatwear.com/what-shoes-to-wear-with-wide-leg-jeans" target="_blank" rel="noopener">Who What Wear</a></span></div></li>
+      <li><span class="n">05</span><img src="s/05.jpg" alt="" data-i="4"><div class="t"><span><span class="mark ok">✓</span> Низкие кеды на тонкой подошве «заземляют» широкие штанины</span><span class="src"><a href="https://www.whowhatwear.com/fashion/denim/the-best-shoes-for-every-jeans-style" target="_blank" rel="noopener">Who What Wear</a>, <a href="https://www.aol.com/articles/10-shoes-wear-wide-leg-190000375.html" target="_blank" rel="noopener">InStyle</a></span></div></li>
+      <li><span class="n">06</span><img src="s/06.jpg" alt="" data-i="5"><div class="t"><span><span class="mark ok">✓</span> Челси на массивной подошве уравновешивают объём штанин</span><span class="src"><a href="https://www.thesymbol.ru/fashion/vybor/kakuyu-obuv-nosit-s-shirokimi-djinsami-v-2024-godu/" target="_blank" rel="noopener">The Symbol</a>, <a href="https://www.womanandhome.com/fashion/fashion-news/kate-winslet-blazer-wide-leg-jeans-chelsea-boots/" target="_blank" rel="noopener">Woman &amp; Home</a></span></div></li>
+      <li><span class="n">07</span><img src="s/07.jpg" alt="" data-i="6"><div class="t"><span><span class="mark ok">✓</span> Казаки, скошенный каблук добавляет роста</span><span class="src"><a href="https://www.thesymbol.ru/fashion/trendy/c-kakoi-obuvyu-nosit-modnye-shirokie-djinsy/" target="_blank" rel="noopener">The Symbol</a>, <a href="https://www.aol.com/articles/10-shoes-wear-wide-leg-190000375.html" target="_blank" rel="noopener">InStyle</a></span></div></li>
+      <li><span class="n">08</span><img src="s/08.jpg" alt="" data-i="7"><div class="t"><span><span class="mark ok">✓</span> Лодочки с острым мысом вытягивают силуэт</span><span class="src"><a href="https://www.whowhatwear.com/fashion/denim/wide-leg-jeans-pointed-toe-shoe-trend" target="_blank" rel="noopener">Who What Wear UK</a>, <a href="https://www.thesymbol.ru/fashion/trendy/c-kakoi-obuvyu-nosit-modnye-shirokie-djinsy/" target="_blank" rel="noopener">The Symbol</a></span></div></li>
+      <li><span class="n">09</span><img src="s/09.jpg" alt="" data-i="8"><div class="t"><span><span class="mark no">✗</span> Джинсы волочатся по полу и «съедают» обувь · <span class="mark no">✗</span> Тяжёлый круглый мыс и толстый ремешок на щиколотке · призыв: сохрани</span><span class="src"><a href="https://www.whowhatwear.com/fashion/denim/the-best-shoes-for-every-jeans-style" target="_blank" rel="noopener">Who What Wear</a>, <a href="https://www.whowhatwear.com/fashion/denim/wide-leg-jeans-pointed-toe-shoe-trend" target="_blank" rel="noopener">Who What Wear UK</a>, <a href="https://terilynadams.com/how-to-style-wide-leg-jeans/" target="_blank" rel="noopener">TeriLyn Adams</a></span></div></li>
+    </ol>
+  </div>
+</div>
+
+<section style="display:grid;gap:14px">
+  <h2>Вещи на фото</h2>
+  <div class="shops">
+    <a class="shop" href="https://limestore.com/ru_ru/product/28747_5263_284-seryi" target="_blank" rel="noopener"><span>Лоферы с мехом, обложка</span><span class="price">13 999 ₽ · LIME</span></a>
+    <a class="shop" href="https://limestore.com/ru_ru/product/37382-0084_392_210_koricnevyi" target="_blank" rel="noopener"><span>Лоферы с кисточкой, слайд 3</span><span class="price">10 999 ₽ · LIME</span></a>
+    <a class="shop" href="https://limestore.com/ru_ru/product/35338-0085_116_602_bordovyi" target="_blank" rel="noopener"><span>Балетки, слайд 4</span><span class="price">11 999 ₽ · LIME</span></a>
+    <a class="shop" href="https://limestore.com/ru_ru/product/35980-5005_153_721_oxra" target="_blank" rel="noopener"><span>Кеды, слайд 5</span><span class="price">11 999 ₽ · LIME</span></a>
+    <a class="shop" href="https://limestore.com/ru_ru/product/38753-0278_414_210_koricnevyi" target="_blank" rel="noopener"><span>Челси, слайд 6</span><span class="price">13 999 ₽ · LIME</span></a>
+    <a class="shop" href="https://limestore.com/ru_ru/product/30925_9704_732-verbliuzii" target="_blank" rel="noopener"><span>Казаки, слайд 7</span><span class="price">14 999 ₽ · LIME</span></a>
+    <a class="shop" href="https://limestore.com/ru_ru/product/36458-0544_595_210_koricnevyi" target="_blank" rel="noopener"><span>Лодочки, слайд 8</span><span class="price">12 999 ₽ · LIME</span></a>
+  </div>
+  <p class="small">Цены с сайта LIME на 19.10.2026. Все фото настоящие, из карточек товаров LIME, ничего не сгенерировано. Джинсы на фото со страниц обуви магазин отдельно не называет.</p>
+  <div class="links"><a class="btn" href="https://dol19sit87-cell.github.io/vk-decks/plan-karuselei/" target="_blank" rel="noopener">План каруселей</a></div>
+</section>
+</div>
+
+<script>
+const track=document.getElementById('track'),n=track.children.length,dots=document.getElementById('dots'),count=document.getElementById('count'),prev=document.getElementById('prev'),next=document.getElementById('next');
+for(let i=0;i<n;i++){dots.appendChild(document.createElement('span'));}
+function cur(){return Math.round(track.scrollLeft/track.clientWidth);}
+function upd(){const i=cur();count.textContent=(i+1)+'/'+n;[...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));prev.disabled=i===0;next.disabled=i===n-1;}
+function go(i){track.scrollTo({left:i*track.clientWidth,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+prev.onclick=()=>go(Math.max(0,cur()-1));next.onclick=()=>go(Math.min(n-1,cur()+1));
+track.addEventListener('scroll',()=>requestAnimationFrame(upd));
+document.querySelectorAll('#list img').forEach(im=>im.onclick=()=>{go(+im.dataset.i);track.scrollIntoView({behavior:'smooth',block:'center'});});
+upd();
+</script>
+
+</body></html>
