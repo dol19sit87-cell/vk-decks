@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Карусели Ирины</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Manrope:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#f6f5f3;--surface:#fff;--fg:#26221f;--muted:#6f6762;--line:#e2ddd8;--ok:#2f7d4f;--okbg:#e6f2ea;--wait:#8a6a1f;--waitbg:#f6eedb;--plan:#6f6762;--planbg:#eeebe7;--accent:#5b4636}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1917;--surface:#252220;--fg:#efebe7;--muted:#a59d96;--line:#38332f;--ok:#7cc79a;--okbg:#20352a;--wait:#e2c27a;--waitbg:#3a311d;--plan:#a59d96;--planbg:#2e2a27;--accent:#d8c3ae}}
+:root[data-theme="dark"]{--bg:#1b1917;--surface:#252220;--fg:#efebe7;--muted:#a59d96;--line:#38332f;--ok:#7cc79a;--okbg:#20352a;--wait:#e2c27a;--waitbg:#3a311d;--plan:#a59d96;--planbg:#2e2a27;--accent:#d8c3ae}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,system-ui,sans-serif;line-height:1.45}
+main{max-width:1080px;margin:0 auto;padding:32px 16px 56px}
+h1{font-family:"Tenor Sans",serif;font-weight:400;font-size:clamp(28px,6vw,44px);margin:0 0 6px}
+.lead{color:var(--muted);margin:0 0 8px;max-width:640px}
+.top{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 28px}
+.btn{display:inline-block;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg);text-decoration:none;font-weight:500;font-size:14px}
+.btn:hover{border-color:var(--accent)}
+h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:30px 0 12px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.card a.cover{display:block;aspect-ratio:4/5;background:var(--planbg)}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.body{padding:12px 14px 14px;display:grid;gap:8px;flex:1}
+.date{font-size:13px;color:var(--muted)}
+.title{font-weight:700;font-size:16px;margin:0}
+.pill{justify-self:start;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px}
+.ok{color:var(--ok);background:var(--okbg)}.wait{color:var(--wait);background:var(--waitbg)}.plan{color:var(--plan);background:var(--planbg)}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.links a{font-size:13px;color:var(--accent);font-weight:700;text-decoration:none}
+.links a:hover{text-decoration:underline}
+.ph{display:grid;place-items:center;height:100%;color:var(--muted);font-family:"Tenor Sans",serif;font-size:20px;padding:20px;text-align:center}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+tr:first-child td{border-top:0}
+td:first-child{white-space:nowrap;color:var(--muted);width:90px}
+.note{color:var(--muted);font-size:13px;margin-top:28px}
+</style>
+</head><body>
+<main>
+<h1>Карусели Ирины</h1>
+<p class="lead">Все карусели для Instagram в одном месте. Нажмите на обложку, чтобы пролистать карусель, посмотреть подпись к посту и источники.</p>
+<div class="top"><a class="btn" href="../plan-karuselei/">План каруселей</a></div>
+
+<h2>Готовые</h2>
+<div class="grid" id="ready"></div>
+
+<h2>Дальше по плану</h2>
+<table id="next"></table>
+
+<p class="note">Фото вещей взяты с сайтов магазинов, фото показов с Vogue Runway. Ничего не сгенерировано.</p>
+</main>
+<script>
+// Ready carousels: page folder in this site, Drive folder with full-size slides
+const READY=[
+ {date:"Пт 23.10",title:"Какая обувь к юбке / платью: ✓ и ✗",page:"../karusel-obuv-k-yubke/",drive:"1KvTUCQnmER67kiQcFkgGLnIMuE_CvXFb",status:"ok"},
+ {date:"Пн 26.10",title:"Какая обувь к джинсам wide leg: ✓ и ✗",page:"../karusel-dzhinsy-wide-leg/",drive:"1uH7Y4nPC1oNzp5klpfOLuF28wZ-zf-V6",status:"ok"},
+ {date:"Ср 28.10",title:"Кроко-кожа: с подиума в магазин",page:"../karusel-kroko/",drive:"1xBDeUYl0C8e8KwIvkW0s_rUot8jih5tE",status:"ok"},
+];
+// Planned topics, moved to READY when finished
+const NEXT=[
+ ["Пт 30.10","Как выглядеть дорого осенью: 6 формул","в работе"],
+ ["Пн 2.11","Какая обувь к брюкам палаццо: ✓ и ✗","в работе"],
+ ["Ср 4.11","Клетка этой осени: как на показах и где купить","в работе"],
+ ["Пт 6.11","Цвет + цвет: 5 дорогих сочетаний этой осени","в работе"],
+ ["Сб 7.11","Было / стало: разбор гардероба клиентки","нужны фото клиентки"],
+ ["Пн 9.11","Как носить юбку стильно зимой","в плане"],
+ ["Ср 11.11","Меховые акценты: 5 вещей, с которыми пальто выглядит дороже","в плане"],
+ ["Пт 13.11","Базовый гардероб: 7 сочетаний цветов, которые выглядят дорого","в плане"],
+ ["Пн 16.11","Какой пуховик выглядит дорого: оттенки и с чем носить","в плане"],
+ ["Ср 18.11","Высокий ворот: с подиума в магазин","в плане"],
+ ["Пт 20.11","Леггинсы вернулись? Как носить в 2026","в плане"],
+ ["Сб 21.11","Что я убрала из шкафа клиентки и почему","нужны фото клиентки"],
+];
+const LBL={ok:"Утверждена",wait:"На проверке"};
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+document.getElementById("ready").innerHTML=READY.map(c=>`
+ <article class="card">
+  <a class="cover" href="${c.page}">${c.cover===false?`<div class="ph">${esc(c.title)}</div>`:`<img src="${c.page}s/01.jpg" alt="${esc(c.title)}" loading="lazy">`}</a>
+  <div class="body">
+   <div class="date">${esc(c.date)}</div>
+   <p class="title">${esc(c.title)}</p>
+   <span class="pill ${c.status}">${LBL[c.status]}</span>
+   <div class="links"><a href="${c.page}">Листать</a>${c.drive?`<a href="https://drive.google.com/drive/folders/${c.drive}" target="_blank" rel="noopener">Слайды на Диске</a>`:""}</div>
+  </div>
+ </article>`).join("");
+document.getElementById("next").innerHTML=NEXT.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td><span class="pill ${r[2]==="в работе"?"wait":"plan"}">${esc(r[2])}</span></td></tr>`).join("");
+</script>
+</body></html>
