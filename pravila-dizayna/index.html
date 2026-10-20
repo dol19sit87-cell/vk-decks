@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Правила дизайна каруселей</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Manrope:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#f6f5f3;--surface:#fff;--fg:#26221f;--muted:#6f6762;--line:#e2ddd8;--accent:#6e2a3d;--soft:#efe9e6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1917;--surface:#252220;--fg:#efebe7;--muted:#a59d96;--line:#38332f;--accent:#d8a3b2;--soft:#2e2a27}}
+:root[data-theme="dark"]{--bg:#1b1917;--surface:#252220;--fg:#efebe7;--muted:#a59d96;--line:#38332f;--accent:#d8a3b2;--soft:#2e2a27}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,system-ui,sans-serif;line-height:1.5}
+main{max-width:860px;margin:0 auto;padding:32px 16px 56px}
+h1{font-family:"Tenor Sans",serif;font-weight:400;font-size:clamp(28px,6vw,42px);margin:0 0 8px}
+h2{font-family:"Tenor Sans",serif;font-weight:400;font-size:24px;margin:34px 0 10px}
+.lead{color:var(--muted);margin:0 0 6px}
+.who{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:18px 0}
+ol.rules{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:r}
+ol.rules li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 52px;position:relative;counter-increment:r}
+ol.rules li::before{content:counter(r);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:13px;background:var(--fg);color:var(--bg);font-weight:700;font-size:13px;display:grid;place-items:center}
+.n{font-weight:700}
+.src{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.src a,a{color:var(--accent)}
+figure{margin:12px 0 0}
+figure img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);display:block}
+figcaption{color:var(--muted);font-size:13px;margin-top:6px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.btn{display:inline-block;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg);text-decoration:none;font-weight:500;font-size:14px}
+</style>
+</head><body>
+<main>
+<h1>Правила дизайна каруселей</h1>
+<p class="lead">Измеримые нормы для каруселей Ирины в Instagram. Каждое правило проверяется на каждом слайде до того, как карусель уходит на утверждение. Версия 20.10.2026.</p>
+
+<div class="who"><b>Кто отвечает.</b> Карусели собирает и за дизайн отвечает Claude в треде «Карусели для Ирины». Отдельный проверяющий (другой агент, не тот, кто собирал) проходит по этому списку каждый слайд и возвращает замечания. Ирина смотрит карусель перед публикацией. Если правило нарушено, карусель не отправляется на утверждение.</div>
+
+<h2>1. Формат</h2>
+<ol class="rules">
+<li><span class="n">Слайд 1080×1350 px (4:5).</span> Это максимум для вертикального поста, выше Instagram обрезает. У всех 39 проверенных слайдов конкурентов (effection_lady, style_support_) тоже 1080×1350.
+<span class="src"><a href="https://carouselli.com/blog/instagram-carousel-size">Carouselli, 19.03.2026</a>: «Instagram caps portrait carousels at 4:5». Размеры конкурентов: замер через Instagram 20.10.2026.</span></li>
+<li><span class="n">Обложка: всё важное в центральных 1012 px по ширине.</span> В сетке профиля обложка показывается как 3:4, с боков срезается примерно по 34 px.
+<span class="src"><a href="https://www.planoly.com/blog/guide-to-instagrams-new-vertical-grid">Planoly, 31.10.2025</a>: сетка 3:4 (1013×1350), 4:5 «crop it to a 3:4 ratio»; <a href="https://www.oktopost.com/blog/instagram-grid-size-guide/">Oktopost, 28.01.2025</a>: «loses a thin strip from the sides».</span></li>
+<li><span class="n">Не больше 20 слайдов</span>, у нас 7–9.
+<span class="src"><a href="https://www.socialmediatoday.com/news/instagram-expands-carousels-to-20-frames/723792/">Social Media Today, 08.08.2024</a></span></li>
+</ol>
+
+<h2>2. Текст</h2>
+<ol class="rules" style="counter-reset:r 3">
+<li><span class="n">Текст не ближе 80 px к краю слайда.</span> Сейчас у нас 80 px.
+<span class="src"><a href="https://carouselli.com/blog/instagram-carousel-size">Carouselli</a>: «keep all text at least 80px from any edge»; шаблон на GitHub <a href="https://github.com/Hainrixz/open-carrusel">open-carrusel</a> (488 звёзд): безопасная зона 10% по бокам и сверху.</span></li>
+<li><span class="n">Заголовок 56–90 px, основной текст не меньше 28 px.</span> У нас заголовок обложки 84 px, текст 34–46 px. На телефоне слайд виден примерно в 1/3 размера, поэтому 28 px это минимум.
+<span class="src"><a href="https://contentdrips.com/blog/2026/05/instagram-carousel-size-format/">Contentdrips, 27.05.2026</a>: «Headline / hook text: 60–90 px», «Body copy: 28–36 px», «viewed at roughly one-third that size».</span></li>
+<li><span class="n">Контраст текста к фону не меньше 4.5:1.</span> Тёмно-коричневый на бежевом проходит, светлый текст на фото без подложки нет.
+<span class="src"><a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">WCAG 2.2, W3C</a>: «a contrast ratio of at least 4.5:1».</span></li>
+<li><span class="n">Текст никогда не лежит на лице или на вещи.</span> Только на бежевой плашке над фото или на фоне (пол, стена). Заголовок обложки 2–6 слов.
+<span class="src">У 8 лучших обложек конкурентов заголовок короткий (2–6 слов) и не перекрывает ни лицо, ни товар: <a href="https://www.instagram.com/p/DdenQG5ioCu/">effection_lady 19.09, 7 842 лайка</a>, <a href="https://www.instagram.com/p/Ddy_IpiirbY/">27.09, 18 134</a>, <a href="https://www.instagram.com/p/Ddo4sLxjgdH/">style_support_ 23.09, 5 663</a>.</span></li>
+</ol>
+
+<h2>3. Фото с человеком</h2>
+<ol class="rules" style="counter-reset:r 7">
+<li><span class="n">Над головой не больше 6% высоты фото.</span> Лучше как у конкурентов: кадр от макушки или подбородка до обуви, место над головой 0%.
+<span class="src">Замер: у effection_lady в «6 формул» и <a href="https://www.instagram.com/p/DePgRZACrQm/">«Как носить юбку зимой», 7 403 лайка</a> все 14 фото с людьми обрезаны по голове или подбородку, над головой 0%. <a href="https://en.wikipedia.org/wiki/Headroom_(photographic_framing)">Wikipedia</a>: лишнее место над головой это «dead space»; <a href="https://www.nikonusa.com/en/learn-and-explore/a/tips-and-techniques/video-composition-rules-establishing-medium-and-close-up-shots.html">Nikon</a>: «only leaving a small amount of airy space above your subject's head».</span></li>
+<li><span class="n">Человек и образ занимают не меньше 85% высоты фото, стена и пол не больше 15%.</span>
+<span class="src">Замер: у конкурентов фигура занимает 95–100% высоты фото, у флэтлея «Травяной + шоколад» вещи идут от 12% до 98% слайда. Ориентир 85% взят из требований к главному фото товара на маркетплейсах.</span></li>
+<li><span class="n">Не резать по суставам:</span> щиколотки, колени, запястья, локти, пальцы. Если слайд про обувь, обувь видна целиком.
+<span class="src"><a href="https://digital-photography-school.com/good-crop-bad-crop-how-to-crop-portraits/">Digital Photography School</a>: «I avoid cropping at any of the joints of the body»; Nikon: «you don't want to accidentally crop them at the ankles».</span></li>
+<li><span class="n">Без жёлтого или зелёного оттенка.</span> На нейтральном месте (стена, белая вещь) красный и синий канал отличаются не больше чем на 8 из 255. Жёлтые кадры выравниваем по серому.
+<span class="src"><a href="https://shotkit.com/gray-card/">Shotkit</a>: «Tungsten bulbs have a yellow hue»; <a href="https://www.adobe.com/learn/lightroom-cc/web/remove-color-cast">Adobe</a>: баланс по «an area that should be a neutral gray». Порог 8/255 наш.</span></li>
+<li><span class="n">Без глубокого декольте и откровенных кадров.</span> Если образ с вырезом, берём крупный план детали (руки, сумка, обувь).
+<span class="src">Решение Родиона 20.10.2026 по «Цвет + цвет».</span></li>
+<li><span class="n">Глаза открыты, лицо не смазано.</span> Лицо в кадре не обязательно: на лучших обложках конкурентов его нет.
+<span class="src">Разбор обложек конкурентов 19.10: «В топе нет обложек с лицом стилиста».</span></li>
+</ol>
+
+<h2>4. Вещи и источники</h2>
+<ol class="rules" style="counter-reset:r 13">
+<li><span class="n">Не больше трети вещей карусели из одного магазина.</span> Магазины из гайда: LIME, Selfmade, Love Republic, Befree, 12 Storeez, Sela, Lamoda.
+<span class="src">Замечание Родиона 20.10.2026: «почему ты берешь только лайм?»</span></li>
+<li><span class="n">Фото вещей только настоящие</span>: с сайта магазина или с показа (Vogue Runway). Ничего не генерируется. У каждой вещи название, цена и ссылка, проверенные в день сборки, вещь в наличии.</li>
+<li><span class="n">Тема подтверждена постом конкурента за последние 14 дней</span> (ссылка, дата, лайки), и у каждого слайда указан источник.</li>
+</ol>
+
+<h2>Замеры конкурентов</h2>
+<figure><img src="effection.jpg" alt="Слайды effection_lady с сеткой 10%">
+<figcaption>effection_lady «Как выглядеть дорого осенью» (7 842 лайка) и «Как носить юбку зимой» (7 403). Красные линии через каждые 10% высоты. Фото занимает верхние ~70% слайда, плашка с текстом нижние ~30%; кадр начинается с головы или подбородка.</figcaption></figure>
+<figure><img src="others.jpg" alt="Слайды effection_lady и style_support_ с сеткой 10%">
+<figcaption>effection_lady «Бургунди + сливочное масло» (4 740), style_support_ «WIDE LEG» (5 663), effection_lady «Травяной + шоколад» (18 134). Пустого фона почти нет, вещи заполняют слайд.</figcaption></figure>
+
+<div class="links"><a class="btn" href="../karuseli/">Все карусели</a><a class="btn" href="../plan-karuselei/">План каруселей</a></div>
+</main>
+</body></html>
