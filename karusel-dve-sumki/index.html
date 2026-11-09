@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Две сумки на всю зиму</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Manrope:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: an Instagram post preview on the left, the stylist's notes (text, sources, shop links) beside it; stacks on phones */
+:root{
+  --bg:#f6f5f3; --surface:#ffffff; --fg:#26221f; --muted:#6f6762; --line:#e2ddd8;
+  --accent:#6e2a3d; --ok:#4f6b3a; --no:#8e2b2b; --soft:#efe9e6;
+  --f-display:"Tenor Sans","Times New Roman",serif;
+  --f-body:"Manrope",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1b1918; --surface:#24211f; --fg:#ece6e1; --muted:#a59c95; --line:#3a3532; --accent:#d98aa0; --ok:#9db27f; --no:#e08a8a; --soft:#2c2826; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1b1918; --surface:#24211f; --fg:#ece6e1; --muted:#a59c95; --line:#3a3532; --accent:#d98aa0; --ok:#9db27f; --no:#e08a8a; --soft:#2c2826; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px;display:grid;gap:36px}
+h1,h2{font-family:var(--f-display);font-weight:400;margin:0;text-wrap:balance}
+h1{font-size:clamp(28px,5.5vw,42px);line-height:1.12}
+h2{font-size:clamp(20px,3.6vw,26px)}
+p{margin:0}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+header{display:grid;gap:10px}
+.status{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-size:13px;padding:3px 10px;border:1px solid var(--line);background:var(--surface)}
+.pill.wait{border-color:var(--accent);color:var(--accent)}
+.top{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:820px){.top{grid-template-columns:minmax(0,1fr)}}
+/* post preview */
+.post{background:var(--surface);border:1px solid var(--line);max-width:420px;width:100%}
+.post-head{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:14px;font-weight:700}
+.ava{width:32px;height:32px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-size:15px;color:var(--accent);border:1px solid var(--line)}
+.car{position:relative}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.track img{flex:0 0 100%;width:100%;aspect-ratio:4/5;object-fit:cover;scroll-snap-align:start;display:block;max-width:100%}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#26221f;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.nav.prev{left:8px}.nav.next{right:8px}
+.nav[disabled]{opacity:0;pointer-events:none}
+.count{position:absolute;right:10px;top:10px;background:rgba(20,16,12,.6);color:#fff;font-family:var(--f-mono);font-size:12px;padding:2px 8px;border-radius:10px}
+.dots{display:flex;justify-content:center;gap:5px;padding:10px 0 4px}
+.dots span{width:6px;height:6px;border-radius:50%;background:var(--line)}
+.dots span.on{background:var(--accent)}
+.caption{padding:6px 12px 14px;font-size:14px;display:grid;gap:6px}
+.caption b{font-weight:700}
+.tags{color:var(--accent)}
+/* notes */
+.notes{display:grid;gap:22px;min-width:0}
+.slides{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.slides li{display:grid;grid-template-columns:44px 64px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+.slides .n{font-family:var(--f-mono);font-size:13px;color:var(--muted);padding-top:2px}
+.slides img{width:64px;aspect-ratio:4/5;object-fit:cover;display:block;cursor:pointer;max-width:100%}
+.slides .t{display:grid;gap:4px;font-size:15px;min-width:0}
+.slides .src{font-size:13px;color:var(--muted)}
+.mark{font-weight:700}
+.mark.ok{color:var(--ok)}.mark.no{color:var(--no)}
+.shops{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.shop{background:var(--surface);border:1px solid var(--line);padding:12px 14px;display:grid;gap:2px;font-size:14px;text-decoration:none;color:var(--fg)}
+.shop:hover{border-color:var(--accent)}
+.shop .price{font-family:var(--f-mono);font-variant-numeric:tabular-nums;color:var(--muted)}
+.small{font-size:13px;color:var(--muted);max-width:75ch}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;padding:9px 14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none;font-size:14px}
+.btn:hover{border-color:var(--accent)}
+</style>
+</head><body>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Карусель · подборка · публикация ср 11.11.2026</div>
+  <h1>Две сумки на всю зиму</h1>
+  <div class="status">
+<span class="pill wait">Готова, проверена</span>
+<span class="pill">5 слайдов · 1080×1350</span>
+<span class="pill">Фото: сайты LIME, Love Republic, Befree, Sela</span>
+</div>
+</header>
+<div class="top">
+  <article class="post" aria-label="Превью поста в Instagram">
+    <div class="post-head">
+<span class="ava">И</span>irina_sitko23</div>
+    <div class="car">
+      <div class="track" id="track">
+        <img src="s/01.jpg" alt="Обложка: «Две сумки на всю зиму»">
+        <img src="s/02.jpg" alt="Сумка 1: покрупнее — Befree, Love Republic, Sela">
+        <img src="s/03.jpg" alt="Сумка 2: поменьше и с деталью — LIME, LIME, Love Republic">
+        <img src="s/04.jpg" alt="С сапогами, с ярким жакетом, с туфлями">
+        <img src="s/05.jpg" alt="Правило и вопрос «Какая тебе нужнее: 1 или 2?»">
+      </div>
+      <button class="nav prev" id="prev" aria-label="Предыдущий слайд">‹</button>
+      <button class="nav next" id="next" aria-label="Следующий слайд">›</button>
+      <span class="count" id="count">1/5</span>
+    </div>
+    <div class="dots" id="dots">
+</div>
+    <div class="caption">
+      <p><b>irina_sitko23</b> Две сумки на всю зиму 👜</p>
+      <p>Хватит двух. Одна покрупнее: в неё помещается всё на день. Вторая поменьше, но с деталью: необычная ручка, форма или кант. Даже простой образ с ней выглядит интереснее.</p>
+      <p>Цвет коричневый или винный. Он подходит и к чёрному, и к серому, и к бежевому, поэтому сумки работают почти с любым образом.</p>
+      <p>Сумка 1, покрупнее:<br>Тоут с замком — Befree, 4 599 ₽<br>Большая хобо из замши — Love Republic, 10 999 ₽<br>Сумка с замшевой фактурой — Sela, 4 599 ₽</p>
+      <p>Сумка 2, поменьше с деталью:<br>Полумесяц с металлической ручкой — LIME, 7 999 ₽<br>Мини-полумесяц из замши — LIME, 12 999 ₽<br>Сумка-цилиндр с кантом — Love Republic, 3 899 ₽</p>
+      <p>Какая тебе нужнее: 1 или 2? Пиши цифру в комментариях.</p>
+      <p>Фото: сайты магазинов. Цены на 9.11.</p>
+      <p>#сумка #базовыйгардероб #стильзимой #капсула #стилист</p>
+    </div>
+  </article>
+  <div class="notes">
+    <h2>Слайды и источники</h2>
+    <ol class="slides" id="list">
+      <li>
+<span class="n">01</span>
+<img src="s/01.jpg" alt="" data-i="0">
+<div class="t">
+<span>Обложка: «Две сумки на всю зиму»</span>
+<span class="src">Почему эта тема: у shvets_kristi ролик «две сумки на осень и зиму» набрал 348 тыс.; ваш «8 DEN» про «выглядеть дорого» 1.11 дал 105 тыс. охвата</span>
+</div>
+</li>
+      <li>
+<span class="n">02</span>
+<img src="s/02.jpg" alt="" data-i="1">
+<div class="t">
+<span>Сумка 1: покрупнее — Befree, Love Republic, Sela</span>
+<span class="src">Фото: сайты магазинов</span>
+</div>
+</li>
+      <li>
+<span class="n">03</span>
+<img src="s/03.jpg" alt="" data-i="2">
+<div class="t">
+<span>Сумка 2: поменьше и с деталью — LIME, LIME, Love Republic</span>
+<span class="src">Фото: сайты магазинов</span>
+</div>
+</li>
+      <li>
+<span class="n">04</span>
+<img src="s/04.jpg" alt="" data-i="3">
+<div class="t">
+<span>С сапогами, с ярким жакетом, с туфлями</span>
+<span class="src">Фото на моделях: LIME, Love Republic</span>
+</div>
+</li>
+      <li>
+<span class="n">05</span>
+<img src="s/05.jpg" alt="" data-i="4">
+<div class="t">
+<span>Правило и вопрос «Какая тебе нужнее: 1 или 2?»</span>
+<span class="src">Цвет коричневый или винный подходит к чёрному, серому, бежевому</span>
+</div>
+</li>
+    </ol>
+  </div>
+</div>
+
+<section style="display:grid;gap:14px">
+  <h2>Вещи на фото</h2>
+  <div class="shops">
+    <a class="shop" href="https://befree.ru/zhenskaya/product/BF2635457040/20" target="_blank" rel="noopener"><span>Тоут с замком, слайд 2</span><span class="price">4 599 ₽ · Befree</span></a>
+    <a class="shop" href="https://loverepublic.ru/catalog/sumki/312913/" target="_blank" rel="noopener"><span>Хобо из замши, слайд 2</span><span class="price">10 999 ₽ · Love Republic</span></a>
+    <a class="shop" href="https://www.sela.ru/eshop/women/aksessuary/sumki/SL6811163205_27/" target="_blank" rel="noopener"><span>Сумка с замшевой фактурой, слайд 2</span><span class="price">4 599 ₽ · Sela</span></a>
+    <a class="shop" href="https://limestore.com/ru_ru/product/37734-9273_419_603_vinnyi" target="_blank" rel="noopener"><span>Полумесяц с металлической ручкой, слайд 3</span><span class="price">7 999 ₽ · LIME</span></a>
+    <a class="shop" href="https://limestore.com/ru_ru/product/36716-9270_524_201_temno_koricnevyi" target="_blank" rel="noopener"><span>Замшевая сумка на плечо, слайд 3</span><span class="price">12 999 ₽ · LIME</span></a>
+    <a class="shop" href="https://loverepublic.ru/catalog/sumki/330505/" target="_blank" rel="noopener"><span>Сумка-цилиндр с кантом, слайд 3</span><span class="price">3 899 ₽ · Love Republic</span></a>
+  </div>
+  <p class="small">Цены и наличие проверены на сайтах магазинов 9.11.2026. Фото с сайтов магазинов, ничего не сгенерировано.</p>
+  <div class="links"><a class="btn" href="https://drive.google.com/drive/folders/1PML9TnoM_58o6vC3wyNKYHGy1ZZYBWoI" target="_blank" rel="noopener">Слайды в полном размере на Диске</a><a class="btn" href="https://dol19sit87-cell.github.io/vk-decks/plan-karuselei/" target="_blank" rel="noopener">План каруселей</a><a class="btn" href="https://dol19sit87-cell.github.io/vk-decks/karuseli/" target="_blank" rel="noopener">Все карусели</a></div>
+</section>
+</div>
+
+<script>
+const track=document.getElementById('track'),n=track.children.length,dots=document.getElementById('dots'),count=document.getElementById('count'),prev=document.getElementById('prev'),next=document.getElementById('next');
+for(let i=0;i<n;i++){dots.appendChild(document.createElement('span'));}
+function cur(){return Math.round(track.scrollLeft/track.clientWidth);}
+function upd(){const i=cur();count.textContent=(i+1)+'/'+n;[...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));prev.disabled=i===0;next.disabled=i===n-1;}
+function go(i){track.scrollTo({left:i*track.clientWidth,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+prev.onclick=()=>go(Math.max(0,cur()-1));next.onclick=()=>go(Math.min(n-1,cur()+1));
+track.addEventListener('scroll',()=>requestAnimationFrame(upd));
+document.querySelectorAll('#list img').forEach(im=>im.onclick=()=>{go(+im.dataset.i);track.scrollIntoView({behavior:'smooth',block:'center'});});
+upd();
+</script>
+</body></html>
